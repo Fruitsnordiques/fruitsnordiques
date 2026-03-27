@@ -8,9 +8,9 @@
    =========================== */
 
 :root {
-  --fn-fond:          #E8EAEC;
-  --fn-fond-clair:    #EEF0F2;
-  --fn-fond-fonce:    #DFE1E3;
+  --fn-fond:          #D4E6D9;
+  --fn-fond-clair:    #DEF0E3;
+  --fn-fond-fonce:    #C4D6C9;
   --fn-texte:         #2D3142;
   --fn-texte-titre:   #1A1D2E;
   --fn-texte-sub:     #4A4E69;
@@ -55,7 +55,7 @@ h1, h2, h3, h4 {
   /* Carte neumorphique — en relief */
   .card-neu {
     @apply rounded-3xl p-6 md:p-8;
-    background: #E8EAEC;
+    background: #D4E6D9;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08),
                 -6px -6px 12px rgba(255, 255, 255, 0.8);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -69,7 +69,7 @@ h1, h2, h3, h4 {
   /* Carte neumorphique accent — glow teal subtil */
   .card-neu-accent {
     @apply rounded-3xl p-6 md:p-8;
-    background: #E8EAEC;
+    background: #D4E6D9;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08),
                 -6px -6px 12px rgba(255, 255, 255, 0.8),
                 0 0 0 1px rgba(45, 122, 79, 0.15);
@@ -85,7 +85,7 @@ h1, h2, h3, h4 {
   /* Carte statistique neumorphique */
   .card-stat-neu {
     @apply rounded-2xl p-6 md:p-8;
-    background: #E8EAEC;
+    background: #D4E6D9;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.06),
                 -4px -4px 8px rgba(255, 255, 255, 0.7);
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
   /* Élément enfoncé (inputs, barres de progression) */
   .inset-neu {
     @apply rounded-xl;
-    background: #E8EAEC;
+    background: #D4E6D9;
     box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.08),
                 inset -4px -4px 8px rgba(255, 255, 255, 0.8);
   }
@@ -119,7 +119,7 @@ h1, h2, h3, h4 {
   /* === BOUTONS NEUMORPHIQUES === */
   .btn-neu {
     @apply rounded-full font-accent font-medium tracking-wide;
-    background: #E8EAEC;
+    background: #D4E6D9;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.08),
                 -4px -4px 8px rgba(255, 255, 255, 0.8);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);

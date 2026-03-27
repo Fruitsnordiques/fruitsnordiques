@@ -10,11 +10,11 @@ module.exports = {
       /* Palette v5 — Neumorphique, fond gris clair, accents verts v1 + soleil */
       colors: {
         fn: {
-          /* Surfaces neumorphiques */
-          'fond':          '#E8EAEC',
-          'fond-clair':    '#EEF0F2',
-          'fond-fonce':    '#DFE1E3',
-          'fond-carte':    '#E8EAEC',
+          /* Surfaces neumorphiques — vert nordique doux */
+          'fond':          '#D4E6D9',
+          'fond-clair':    '#DEF0E3',
+          'fond-fonce':    '#C4D6C9',
+          'fond-carte':    '#D4E6D9',
 
           /* Texte — hiérarchie sombre sur fond clair */
           'texte':         '#2D3142',
