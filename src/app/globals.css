@@ -15,8 +15,12 @@
   --fn-texte-titre:   #1A1D2E;
   --fn-texte-sub:     #4A4E69;
   --fn-texte-muted:   #6B7080;
-  --fn-teal:          #4ABFB4;
-  --fn-orange:        #E8862A;
+  --fn-vert:          #2D7A4F;
+  --fn-vert-fonce:    #1A3A2A;
+  --fn-vert-clair:    #5BAD7A;
+  --fn-soleil:        #E8A020;
+  --fn-teal:          #2D7A4F;
+  --fn-orange:        #E8A020;
 }
 
 /* Typographie de base — fond clair neumorphique */
@@ -68,14 +72,14 @@ h1, h2, h3, h4 {
     background: #E8EAEC;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08),
                 -6px -6px 12px rgba(255, 255, 255, 0.8),
-                0 0 0 1px rgba(74, 191, 180, 0.15);
+                0 0 0 1px rgba(45, 122, 79, 0.15);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-neu-accent:hover {
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1),
                 -8px -8px 16px rgba(255, 255, 255, 0.85),
-                0 0 12px rgba(74, 191, 180, 0.15);
+                0 0 12px rgba(45, 122, 79, 0.15);
   }
 
   /* Carte statistique neumorphique */
@@ -139,7 +143,7 @@ h1, h2, h3, h4 {
 
 /* Sélection de texte — teal */
 ::selection {
-  background-color: rgba(74, 191, 180, 0.25);
+  background-color: rgba(45, 122, 79, 0.25);
   color: var(--fn-texte-titre);
 }
 

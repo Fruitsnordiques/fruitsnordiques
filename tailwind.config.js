@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      /* Palette v5 — Neumorphique, fond gris clair, accents teal + orange */
+      /* Palette v5 — Neumorphique, fond gris clair, accents verts v1 + soleil */
       colors: {
         fn: {
           /* Surfaces neumorphiques */
@@ -23,17 +23,25 @@ module.exports = {
           'texte-muted':   '#6B7080',
           'texte-light':   '#8A8F9C',
 
-          /* Accents — conservés */
-          'teal':          '#4ABFB4',
-          'teal-fonce':    '#3AA89E',
-          'teal-glow':     'rgba(74, 191, 180, 0.15)',
-          'orange':        '#E8862A',
-          'orange-doux':   '#F0A050',
-          'orange-glow':   'rgba(232, 134, 42, 0.12)',
-          'vert-vif':      '#34D399',
-          'rouge':         '#EF4444',
-          'jaune':         '#F59E0B',
-          'bleu':          '#3B82F6',
+          /* Accents — palette verte v1 Fruits Nordiques */
+          'vert':          '#2D7A4F',
+          'vert-fonce':    '#1A3A2A',
+          'vert-clair':    '#5BAD7A',
+          'vert-glow':     'rgba(45, 122, 79, 0.15)',
+          'soleil':        '#E8A020',
+          'soleil-doux':   '#F0B850',
+          'soleil-glow':   'rgba(232, 160, 32, 0.12)',
+          'terre':         '#8B5E3C',
+          'rouge':         '#C0392B',
+          'bleu-glace':    '#A8C8D8',
+
+          /* Alias rétrocompatibilité */
+          'teal':          '#2D7A4F',
+          'teal-fonce':    '#1A3A2A',
+          'teal-glow':     'rgba(45, 122, 79, 0.15)',
+          'orange':        '#E8A020',
+          'orange-doux':   '#F0B850',
+          'orange-glow':   'rgba(232, 160, 32, 0.12)',
 
           /* Bordures neumorphiques */
           'bordure':       'rgba(255, 255, 255, 0.7)',
@@ -80,8 +88,10 @@ module.exports = {
         /* Boutons pressés */
         'neu-pressed':  'inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.7)',
         /* Glow accent */
-        'glow-teal':    '0 0 20px rgba(74, 191, 180, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
-        'glow-orange':  '0 0 20px rgba(232, 134, 42, 0.2), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'glow-teal':    '0 0 20px rgba(45, 122, 79, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'glow-vert':    '0 0 20px rgba(45, 122, 79, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'glow-orange':  '0 0 20px rgba(232, 160, 32, 0.2), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'glow-soleil':  '0 0 20px rgba(232, 160, 32, 0.2), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
       },
       /* Animations */
       keyframes: {
