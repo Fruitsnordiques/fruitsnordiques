@@ -3,30 +3,27 @@
 @tailwind utilities;
 
 /* ===========================
-   Design System — Fruits Nordiques v4
-   Style : Kainon-inspired ultra-minimal dark
+   Design System — Fruits Nordiques v5
+   Style : Neumorphique — relief doux, fond gris clair
    =========================== */
 
 :root {
-  --fn-noir-profond:  #0A0B0F;
-  --fn-noir:          #0F1014;
-  --fn-noir-carte:    #141519;
-  --fn-noir-eleve:    #1A1B22;
-  --fn-gris-bordure:  rgba(255, 255, 255, 0.06);
-  --fn-gris-fonce:    #3A3D4A;
-  --fn-gris:          #6B7080;
-  --fn-gris-clair:    #8A8F9C;
-  --fn-blanc:         #E8E9ED;
-  --fn-blanc-pur:     #FFFFFF;
+  --fn-fond:          #E8EAEC;
+  --fn-fond-clair:    #EEF0F2;
+  --fn-fond-fonce:    #DFE1E3;
+  --fn-texte:         #2D3142;
+  --fn-texte-titre:   #1A1D2E;
+  --fn-texte-sub:     #4A4E69;
+  --fn-texte-muted:   #6B7080;
   --fn-teal:          #4ABFB4;
   --fn-orange:        #E8862A;
 }
 
-/* Typographie de base — ultra dark */
+/* Typographie de base — fond clair neumorphique */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--fn-blanc);
-  background-color: var(--fn-noir-profond);
+  color: var(--fn-texte);
+  background-color: var(--fn-fond);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -34,7 +31,7 @@ body {
 
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', Georgia, serif;
-  color: var(--fn-gris-clair);
+  color: var(--fn-texte-titre);
   line-height: 1.05;
 }
 
@@ -49,86 +46,119 @@ h1, h2, h3, h4 {
     @apply py-24 md:py-32 lg:py-40;
   }
 
-  /* === SURFACES KAINON === */
+  /* === SURFACES NEUMORPHIQUES === */
 
-  /* Carte subtile — fond à peine plus clair, bordure quasi invisible */
-  .card-kainon {
-    @apply rounded-2xl;
-    background: #141519;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Carte neumorphique — en relief */
+  .card-neu {
+    @apply rounded-3xl p-6 md:p-8;
+    background: #E8EAEC;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08),
+                -6px -6px 12px rgba(255, 255, 255, 0.8);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-kainon:hover {
-    border-color: rgba(255, 255, 255, 0.1);
+  .card-neu:hover {
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1),
+                -8px -8px 16px rgba(255, 255, 255, 0.85);
   }
 
-  /* Carte accent — bordure teal subtile */
-  .card-kainon-accent {
-    @apply rounded-2xl;
-    background: #141519;
-    border: 1px solid rgba(74, 191, 180, 0.15);
+  /* Carte neumorphique accent — glow teal subtil */
+  .card-neu-accent {
+    @apply rounded-3xl p-6 md:p-8;
+    background: #E8EAEC;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08),
+                -6px -6px 12px rgba(255, 255, 255, 0.8),
+                0 0 0 1px rgba(74, 191, 180, 0.15);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-kainon-accent:hover {
-    border-color: rgba(74, 191, 180, 0.3);
+  .card-neu-accent:hover {
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1),
+                -8px -8px 16px rgba(255, 255, 255, 0.85),
+                0 0 12px rgba(74, 191, 180, 0.15);
   }
 
-  /* Carte statistique — pour chiffres géants */
-  .card-stat-kainon {
-    @apply rounded-xl p-6 md:p-8;
-    background: rgba(20, 21, 25, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+  /* Carte statistique neumorphique */
+  .card-stat-neu {
+    @apply rounded-2xl p-6 md:p-8;
+    background: #E8EAEC;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.06),
+                -4px -4px 8px rgba(255, 255, 255, 0.7);
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Élément enfoncé (inputs, barres de progression) */
+  .inset-neu {
+    @apply rounded-xl;
+    background: #E8EAEC;
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.08),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  }
+
   /* === LABELS UPPERCASE === */
-  .label-kainon {
+  .label-neu {
     @apply font-accent text-[11px] font-semibold tracking-[0.2em] uppercase;
-    color: var(--fn-gris);
+    color: var(--fn-texte-muted);
   }
 
-  /* === SÉPARATEUR === */
-  .divider-kainon {
+  /* === SÉPARATEUR NEUMORPHIQUE === */
+  .divider-neu {
     @apply w-full h-px;
-    background: rgba(255, 255, 255, 0.06);
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.08) 20%,
+      rgba(0, 0, 0, 0.08) 80%,
+      transparent 100%
+    );
   }
 
-  /* === BOUTONS CAPSULE === */
-  .btn-capsule {
+  /* === BOUTONS NEUMORPHIQUES === */
+  .btn-neu {
     @apply rounded-full font-accent font-medium tracking-wide;
+    background: #E8EAEC;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.08),
+                -4px -4px 8px rgba(255, 255, 255, 0.8);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-neu:hover {
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+                -6px -6px 12px rgba(255, 255, 255, 0.85);
+  }
+
+  .btn-neu:active {
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.7);
   }
 
   /* Focus visible pour accessibilité */
   .focus-fn {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir-profond;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-fond;
   }
 }
 
 /* Sélection de texte — teal */
 ::selection {
-  background-color: rgba(74, 191, 180, 0.2);
-  color: var(--fn-blanc);
+  background-color: rgba(74, 191, 180, 0.25);
+  color: var(--fn-texte-titre);
 }
 
-/* Scrollbar — ultra-fine */
+/* Scrollbar — neumorphique */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--fn-noir-profond);
+  background: var(--fn-fond);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* Scroll fluide */

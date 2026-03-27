@@ -7,8 +7,8 @@ import { useRef } from 'react';
 import Button from '@/components/ui/Button';
 
 /**
- * CTA v4 — Style Kainon
- * Titre géant, 3 cartes action, fond légèrement distinct
+ * CTA v5 — Neumorphique
+ * 3 cartes d'action en relief, fond légèrement distinct
  */
 
 const actions = [
@@ -62,19 +62,19 @@ function ActionCard({
         delay: index * 0.1,
       }}
     >
-      <div className="card-kainon p-6 lg:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Numéro */}
         <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-6">
           {action.number}
         </span>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-lg text-fn-blanc mb-3 tracking-wide">
+        <h3 className="font-accent font-semibold text-lg text-fn-texte-titre mb-3 tracking-wide">
           {action.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow mb-8">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow mb-8">
           {action.description}
         </p>
 
@@ -99,21 +99,7 @@ export default function CTA() {
   return (
     <section
       id="agir"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #10181A 10%,
-          #162822 25%,
-          #1E4A35 40%,
-          #3D3018 55%,
-          #5A4A28 65%,
-          #8B5A1E 75%,
-          #E8862A 85%,
-          #5A3212 92%,
-          #1A3A2A 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond-clair"
       aria-label="Appel à l'action — Engagez-vous"
     >
       <div className="max-w-7xl mx-auto">
@@ -125,23 +111,23 @@ export default function CTA() {
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="label-kainon block mb-5">Agir</span>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair mb-6 leading-[1.02]">
+          <span className="label-neu block mb-5">Agir</span>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre mb-6 leading-[1.02]">
             Prêt à bâtir l'avenir
             <br />
             <span className="text-fn-teal">alimentaire du Québec ?</span>
           </h2>
-          <p className="text-base md:text-lg font-corps text-fn-gris max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg font-corps text-fn-texte-sub max-w-2xl mx-auto leading-relaxed">
             Que vous soyez investisseur, partenaire, organisme ou citoyen engagé —
             il y a une place pour vous dans ce projet.
           </p>
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille de cartes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {actions.map((action, index) => (
             <ActionCard key={action.id} action={action} index={index} />
           ))}

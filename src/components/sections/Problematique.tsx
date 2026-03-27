@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Problématique v4 — Style Kainon
- * Chiffres géants, cartes subtiles, layout 2 colonnes
+ * Problématique v5 — Neumorphique
+ * Cartes en relief, chiffres teal, fond gris clair
  */
 
 const problems = [
@@ -69,19 +69,19 @@ function ProblemCard({
         delay: index * 0.08,
       }}
     >
-      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Chiffre géant */}
         <span className="font-titre text-3xl md:text-4xl font-bold text-fn-teal mb-4">
           {problem.stat}
         </span>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-sm text-fn-blanc mb-3 tracking-wide">
+        <h3 className="font-accent font-semibold text-sm text-fn-texte-titre mb-3 tracking-wide">
           {problem.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow">
           {problem.description}
         </p>
       </div>
@@ -96,18 +96,7 @@ export default function Problematique() {
   return (
     <section
       id="problematique"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #121820 15%,
-          #1A2A22 35%,
-          #1E3328 50%,
-          #1A2A22 65%,
-          #121820 85%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond"
       aria-label="Section sur le défi alimentaire du Québec"
     >
       <div className="max-w-7xl mx-auto">
@@ -120,8 +109,8 @@ export default function Problematique() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Problématique</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Problématique</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               Le défi
               <br />
               alimentaire
@@ -130,7 +119,7 @@ export default function Problematique() {
             </h2>
           </div>
           <div className="flex items-end">
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed">
               Notre système alimentaire est fragile. Dépendance aux importations,
               déserts alimentaires, déclin de la relève — les signaux d'alerte
               se multiplient.
@@ -139,10 +128,10 @@ export default function Problematique() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille de problèmes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {problems.map((problem, index) => (
             <ProblemCard
               key={problem.id}

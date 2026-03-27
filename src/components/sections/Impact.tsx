@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Impact v4 — Style Kainon
- * 3 colonnes, titres teal, bullet points discrets
+ * Impact v5 — Neumorphique
+ * 3 colonnes en relief, numéros décoratifs, bullet points
  */
 
 const impactCategories = [
@@ -64,14 +64,14 @@ function ImpactCard({
         delay: index * 0.1,
       }}
     >
-      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Numéro décoratif */}
         <span className="font-titre text-5xl md:text-6xl font-bold text-fn-teal/20 mb-4">
           0{index + 1}
         </span>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-base text-fn-teal mb-6 tracking-wide">
+        <h3 className="font-accent font-semibold text-base text-fn-teal-fonce mb-6 tracking-wide">
           {category.title}
         </h3>
 
@@ -80,9 +80,9 @@ function ImpactCard({
           {category.points.map((point, idx) => (
             <li
               key={idx}
-              className="flex items-start font-corps text-sm text-fn-gris-clair"
+              className="flex items-start font-corps text-sm text-fn-texte-sub"
             >
-              <span className="inline-block w-1 h-1 rounded-full bg-fn-teal/40 mr-3 mt-2 flex-shrink-0" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-fn-teal/40 mr-3 mt-2 flex-shrink-0" />
               <span>{point}</span>
             </li>
           ))}
@@ -99,18 +99,7 @@ export default function Impact() {
   return (
     <section
       id="impact"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #121A18 15%,
-          #1A3A2A 35%,
-          #1A3A2A 50%,
-          #1A3A2A 65%,
-          #121A18 85%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond-clair"
       aria-label="Section sur les trois dimensions d'impact"
     >
       <div className="max-w-7xl mx-auto">
@@ -123,15 +112,15 @@ export default function Impact() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Impact</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Impact</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               Un impact à
               <br />
               <span className="text-fn-teal">trois dimensions</span>
             </h2>
           </div>
           <div className="flex items-end">
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed">
               Chaque action génère des bénéfices économiques, écologiques et
               sociaux — un cercle vertueux au service du territoire.
             </p>
@@ -139,10 +128,10 @@ export default function Impact() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille 3 colonnes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {impactCategories.map((category, index) => (
             <ImpactCard
               key={category.id}

@@ -15,8 +15,8 @@ const navLinks = [
 ];
 
 /**
- * Navigation v4 — style Kainon
- * Liens discrets, bouton Contact avec bordure capsule
+ * Navigation v5 — Neumorphique
+ * Boutons avec ombres douces, texte sombre sur fond clair
  */
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,8 +49,8 @@ export default function Navigation() {
                 href={link.href}
                 className={`font-accent text-[13px] tracking-wide transition-colors duration-300 ${
                   isActive(link.href)
-                    ? 'text-fn-blanc'
-                    : 'text-fn-gris hover:text-fn-blanc'
+                    ? 'text-fn-teal-fonce font-semibold'
+                    : 'text-fn-texte-muted hover:text-fn-texte-titre'
                 }`}
                 aria-current={isActive(link.href) ? 'page' : undefined}
               >
@@ -60,10 +60,10 @@ export default function Navigation() {
           ))}
         </ul>
 
-        {/* Bouton Contact — capsule bordée */}
+        {/* Bouton Contact — neumorphique */}
         <Link
           href="/contact"
-          className="btn-capsule border border-fn-gris-bordure-hover text-fn-gris-clair px-5 py-2 text-[13px] font-accent tracking-wide hover:text-fn-blanc hover:border-fn-gris transition-all duration-300"
+          className="btn-neu px-5 py-2 text-[13px] font-accent tracking-wide text-fn-texte-sub hover:text-fn-teal-fonce transition-all duration-300"
         >
           Contact
         </Link>
@@ -71,7 +71,7 @@ export default function Navigation() {
 
       {/* Bouton Menu Mobile */}
       <button
-        className="md:hidden p-2 -mr-2 text-fn-gris-clair hover:text-fn-blanc transition-colors"
+        className="md:hidden p-2 -mr-2 text-fn-texte-sub hover:text-fn-texte-titre transition-colors"
         onClick={toggleMenu}
         aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
         aria-expanded={isOpen}
@@ -92,7 +92,10 @@ export default function Navigation() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2 }}
-          className="fixed top-[72px] left-0 right-0 bg-fn-noir-profond/98 backdrop-blur-md border-b border-white/[0.04] md:hidden z-50"
+          className="fixed top-[72px] left-0 right-0 bg-fn-fond/98 backdrop-blur-md md:hidden z-50"
+          style={{
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.08)'
+          }}
         >
           <ul className="flex flex-col p-6 gap-1">
             {navLinks.map((link) => (
@@ -102,8 +105,8 @@ export default function Navigation() {
                   onClick={handleLinkClick}
                   className={`font-accent text-sm block px-4 py-3 rounded-xl transition-colors duration-200 ${
                     isActive(link.href)
-                      ? 'text-fn-blanc'
-                      : 'text-fn-gris hover:text-fn-blanc'
+                      ? 'text-fn-teal-fonce font-semibold'
+                      : 'text-fn-texte-sub hover:text-fn-texte-titre'
                   }`}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                 >
@@ -115,7 +118,7 @@ export default function Navigation() {
               <Link
                 href="/contact"
                 onClick={handleLinkClick}
-                className="font-accent text-sm block px-4 py-3 text-fn-teal"
+                className="font-accent text-sm block px-4 py-3 text-fn-teal-fonce font-medium"
               >
                 Contact
               </Link>

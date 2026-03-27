@@ -7,26 +7,29 @@ interface BadgeProps {
 }
 
 /**
- * Badge v4 — style Kainon, discret et élégant
+ * Badge v5 — style neumorphique, léger relief
  */
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ children, variant = 'teal', className = '' }, ref) => {
     const variantClasses = {
-      teal:   'bg-fn-teal/10 text-fn-teal border-fn-teal/20',
-      orange: 'bg-fn-orange/10 text-fn-orange border-fn-orange/20',
-      neutre: 'bg-white/[0.04] text-fn-gris-clair border-white/[0.06]',
-      rouge:  'bg-fn-rouge/10 text-fn-rouge border-fn-rouge/20',
+      teal:   'bg-fn-teal/15 text-fn-teal-fonce',
+      orange: 'bg-fn-orange/15 text-fn-orange',
+      neutre: 'bg-fn-fond-fonce text-fn-texte-muted',
+      rouge:  'bg-fn-rouge/15 text-fn-rouge',
     };
 
     return (
       <span
         ref={ref}
         className={`
-          inline-flex items-center px-3 py-1 rounded-full border
+          inline-flex items-center px-3 py-1 rounded-full
           font-accent font-medium text-[11px] tracking-[0.08em]
           ${variantClasses[variant]}
           ${className}
         `}
+        style={{
+          boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.05), -2px -2px 4px rgba(255, 255, 255, 0.6)'
+        }}
       >
         {children}
       </span>

@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Formation v4 — Style Kainon
- * Cartes numérotées, panneau partenariats discret
+ * Formation v5 — Neumorphique
+ * Cartes numérotées en relief, panneau partenariats
  */
 
 const trainingCards = [
@@ -55,19 +55,19 @@ function TrainingCard({
         delay: index * 0.1,
       }}
     >
-      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Numéro */}
         <span className="font-titre text-4xl font-bold text-fn-teal/30 mb-6">
           {card.number}
         </span>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+        <h3 className="font-accent font-semibold text-base text-fn-texte-titre mb-3 tracking-wide">
           {card.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow">
           {card.description}
         </p>
       </div>
@@ -82,18 +82,7 @@ export default function Formation() {
   return (
     <section
       id="formation"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #101820 15%,
-          #163040 35%,
-          #163040 50%,
-          #163040 65%,
-          #101820 85%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond-clair"
       aria-label="Section de formation de la relève"
     >
       <div className="max-w-7xl mx-auto">
@@ -106,15 +95,15 @@ export default function Formation() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Formation</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Formation</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               Former la relève.
               <br />
               <span className="text-fn-teal">Créer l'avenir.</span>
             </h2>
           </div>
           <div className="flex items-end">
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed">
               Fruits Nordiques offre un programme de formation en agronomie,
               horticulture, gestion de serre et entrepreneuriat agricole.
               Des connaissances pratiques qui préparent la relève à réussir.
@@ -122,22 +111,22 @@ export default function Formation() {
           </div>
         </motion.div>
 
-        {/* Panneau partenariats */}
+        {/* Panneau partenariats — neumorphique accent */}
         <motion.div
-          className="card-kainon-accent p-6 md:p-8 mb-12 md:mb-16"
+          className="card-neu-accent mb-12 md:mb-16"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           viewport={{ once: true }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <p className="font-corps text-sm text-fn-gris-clair leading-relaxed">
-              <span className="font-accent font-semibold text-fn-teal">Partenariats</span> — Nous
+            <p className="font-corps text-sm text-fn-texte-sub leading-relaxed">
+              <span className="font-accent font-semibold text-fn-teal-fonce">Partenariats</span> — Nous
               collaborons avec des établissements d'enseignement locaux (DEP, AEC,
               universitaire) pour assurer une formation alignée avec les besoins du marché.
             </p>
-            <p className="font-corps text-sm text-fn-gris-clair leading-relaxed">
-              <span className="font-accent font-semibold text-fn-teal">Priorité</span> — Jeunes,
+            <p className="font-corps text-sm text-fn-texte-sub leading-relaxed">
+              <span className="font-accent font-semibold text-fn-teal-fonce">Priorité</span> — Jeunes,
               personnes sans emploi et en réorientation professionnelle trouvent
               ici une porte d'entrée vers une carrière significative.
             </p>
@@ -145,10 +134,10 @@ export default function Formation() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Cartes de formation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {trainingCards.map((card, index) => (
             <TrainingCard
               key={card.id}

@@ -7,14 +7,14 @@ interface CardProps {
 }
 
 /**
- * Carte v4 — style Kainon, surfaces subtiles
+ * Carte v5 — style neumorphique, relief doux
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ children, variant = 'default', className = '' }, ref) => {
     const variants = {
-      default: 'card-kainon',
-      accent: 'card-kainon-accent',
-      stat: 'card-stat-kainon',
+      default: 'card-neu',
+      accent: 'card-neu-accent',
+      stat: 'card-stat-neu',
     };
 
     return (

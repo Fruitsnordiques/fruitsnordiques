@@ -5,9 +5,8 @@ import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 
 /**
- * Hero v4 — Style Kainon
- * Typographie géante, 2 colonnes, fond noir uniforme
- * Stats en grille avec chiffres énormes
+ * Hero v5 — Neumorphique
+ * Fond gris clair, typographie géante sombre, stats en relief
  */
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,37 +51,23 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen w-full overflow-hidden flex items-center"
+      className="relative min-h-screen w-full overflow-hidden flex items-center bg-fn-fond"
       aria-label="Section d'accueil principale"
-      style={{
-        background: `linear-gradient(180deg,
-          #1A3A2A 0%,
-          #1A3A2A 40%,
-          #1E4A35 55%,
-          #2D5A3A 62%,
-          #5A4A28 72%,
-          #8B5A1E 78%,
-          #E8862A 82%,
-          #C46A1E 86%,
-          #5A3212 90%,
-          #1A1510 94%,
-          #0A0B0F 100%
-        )`,
-      }}
     >
-      {/* Grille subtile + halo */}
+      {/* Motif subtil de cercles en arrière-plan */}
       <div className="absolute inset-0" aria-hidden="true">
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)',
+            backgroundSize: '40px 40px',
           }}
         />
+        {/* Halo teal subtil */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.03) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse at 30% 40%, rgba(74, 191, 180, 0.06) 0%, transparent 50%)',
           }}
         />
       </div>
@@ -96,14 +81,14 @@ export default function Hero() {
       >
         {/* Label */}
         <motion.div variants={itemVariants} className="mb-8">
-          <span className="label-kainon text-fn-teal">
+          <span className="label-neu text-fn-teal-fonce">
             Phase 0 — Fondation 2025–2026
           </span>
         </motion.div>
 
         {/* Titre géant */}
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-titre font-bold text-fn-gris-clair mb-8 leading-[0.95] tracking-tight"
+          className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-titre font-bold text-fn-texte-titre mb-8 leading-[0.95] tracking-tight"
           variants={itemVariants}
         >
           Nourrir
@@ -117,7 +102,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-24">
           <div /> {/* Espace vide à gauche sur desktop */}
           <motion.div variants={itemVariants}>
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed mb-8">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed mb-8">
               Une serre de production d'un hectare, à vocation sociale,
               éducative et alimentaire — pour bâtir la résilience alimentaire
               du Québec.
@@ -144,19 +129,22 @@ export default function Hero() {
         </div>
 
         {/* Séparateur */}
-        <motion.div variants={itemVariants} className="divider-kainon mb-12" />
+        <motion.div variants={itemVariants} className="divider-neu mb-12" />
 
-        {/* Statistiques — chiffres géants */}
+        {/* Statistiques en relief neumorphique */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
           variants={itemVariants}
         >
           {stats.map((stat, i) => (
-            <div key={i} className="text-left">
-              <div className="font-titre text-4xl md:text-5xl lg:text-6xl font-bold text-fn-blanc mb-2">
+            <div
+              key={i}
+              className="card-stat-neu text-left"
+            >
+              <div className="font-titre text-4xl md:text-5xl lg:text-6xl font-bold text-fn-texte-titre mb-2">
                 {stat.value}
               </div>
-              <div className="label-kainon">
+              <div className="label-neu">
                 {stat.label}
               </div>
             </div>

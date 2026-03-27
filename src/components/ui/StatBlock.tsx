@@ -8,25 +8,25 @@ interface StatBlockProps {
 }
 
 /**
- * Bloc statistique v4 — style Kainon, chiffres géants
+ * Bloc statistique v5 — neumorphique, chiffres géants
  */
 const StatBlock = React.forwardRef<HTMLDivElement, StatBlockProps>(
   ({ value, label, description, className = '' }, ref) => {
     return (
       <div
         ref={ref}
-        className={`card-stat-kainon flex flex-col ${className}`}
+        className={`card-stat-neu flex flex-col ${className}`}
       >
-        <div className="font-titre text-4xl md:text-5xl font-bold text-fn-blanc mb-2 tracking-tight">
+        <div className="font-titre text-4xl md:text-5xl font-bold text-fn-texte-titre mb-2 tracking-tight">
           {value}
         </div>
 
-        <div className="label-kainon mb-1">
+        <div className="label-neu mb-1">
           {label}
         </div>
 
         {description && (
-          <p className="font-corps text-sm text-fn-gris mt-2 leading-relaxed">
+          <p className="font-corps text-sm text-fn-texte-muted mt-2 leading-relaxed">
             {description}
           </p>
         )}

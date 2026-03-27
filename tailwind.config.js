@@ -7,34 +7,37 @@ module.exports = {
   ],
   theme: {
     extend: {
-      /* Palette Kainon-inspired — ultra-dark, teal accent, minimaliste */
+      /* Palette v5 — Neumorphique, fond gris clair, accents teal + orange */
       colors: {
         fn: {
-          /* Surfaces — noir uniforme profond */
-          'noir-profond':  '#0A0B0F',
-          'noir':          '#0F1014',
-          'noir-carte':    '#141519',
-          'noir-eleve':    '#1A1B22',
-          'gris-bordure':  'rgba(255, 255, 255, 0.06)',
-          'gris-bordure-hover': 'rgba(255, 255, 255, 0.12)',
+          /* Surfaces neumorphiques */
+          'fond':          '#E8EAEC',
+          'fond-clair':    '#EEF0F2',
+          'fond-fonce':    '#DFE1E3',
+          'fond-carte':    '#E8EAEC',
 
-          /* Texte — hiérarchie grise */
-          'gris-fonce':    '#3A3D4A',
-          'gris':          '#6B7080',
-          'gris-clair':    '#8A8F9C',
-          'blanc':         '#E8E9ED',
-          'blanc-pur':     '#FFFFFF',
+          /* Texte — hiérarchie sombre sur fond clair */
+          'texte':         '#2D3142',
+          'texte-titre':   '#1A1D2E',
+          'texte-sub':     '#4A4E69',
+          'texte-muted':   '#6B7080',
+          'texte-light':   '#8A8F9C',
 
-          /* Accents */
+          /* Accents — conservés */
           'teal':          '#4ABFB4',
-          'teal-glow':     'rgba(74, 191, 180, 0.12)',
+          'teal-fonce':    '#3AA89E',
+          'teal-glow':     'rgba(74, 191, 180, 0.15)',
           'orange':        '#E8862A',
           'orange-doux':   '#F0A050',
-          'orange-glow':   'rgba(232, 134, 42, 0.10)',
+          'orange-glow':   'rgba(232, 134, 42, 0.12)',
           'vert-vif':      '#34D399',
           'rouge':         '#EF4444',
           'jaune':         '#F59E0B',
           'bleu':          '#3B82F6',
+
+          /* Bordures neumorphiques */
+          'bordure':       'rgba(255, 255, 255, 0.7)',
+          'bordure-fonce': 'rgba(0, 0, 0, 0.08)',
         },
       },
       /* Typographie — serif géant + sans-serif épuré */
@@ -57,21 +60,30 @@ module.exports = {
         '8xl': ['6rem', { lineHeight: '1.02' }],
         '9xl': ['8rem', { lineHeight: '0.95' }],
       },
-      /* Arrondis fins */
+      /* Arrondis doux neumorphiques */
       borderRadius: {
         'xl':  '0.75rem',
         '2xl': '1rem',
-        '3xl': '1.25rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
       },
-      /* Ombres ultra-subtiles */
+      /* Ombres neumorphiques — double ombre (lumière + sombre) */
       boxShadow: {
-        'subtle':     '0 1px 2px rgba(0, 0, 0, 0.2)',
-        'card':       '0 2px 8px rgba(0, 0, 0, 0.15)',
-        'card-hover': '0 4px 16px rgba(0, 0, 0, 0.25)',
-        'glow-teal':  '0 0 24px rgba(74, 191, 180, 0.15)',
-        'glow-orange':'0 0 24px rgba(232, 134, 42, 0.12)',
+        /* Éléments en relief (convexe) */
+        'neu':          '6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'neu-md':       '8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.85)',
+        'neu-lg':       '12px 12px 24px rgba(0, 0, 0, 0.1), -12px -12px 24px rgba(255, 255, 255, 0.9)',
+        'neu-xl':       '16px 16px 32px rgba(0, 0, 0, 0.12), -16px -16px 32px rgba(255, 255, 255, 0.9)',
+        /* Éléments enfoncés (concave) */
+        'neu-inset':    'inset 4px 4px 8px rgba(0, 0, 0, 0.08), inset -4px -4px 8px rgba(255, 255, 255, 0.8)',
+        'neu-inset-md': 'inset 6px 6px 12px rgba(0, 0, 0, 0.1), inset -6px -6px 12px rgba(255, 255, 255, 0.85)',
+        /* Boutons pressés */
+        'neu-pressed':  'inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.7)',
+        /* Glow accent */
+        'glow-teal':    '0 0 20px rgba(74, 191, 180, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
+        'glow-orange':  '0 0 20px rgba(232, 134, 42, 0.2), 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.8)',
       },
-      /* Animations — fluides et discrètes */
+      /* Animations */
       keyframes: {
         'fade-in-up': {
           '0%':   { opacity: '0', transform: 'translateY(16px)' },

@@ -7,8 +7,8 @@ import { useRef } from 'react';
 import Link from 'next/link';
 
 /**
- * Technologie v4 — Style Kainon
- * Métriques énormes, cartes subtiles, lien Kainon en teal
+ * Technologie v5 — Neumorphique
+ * Métriques géantes, cartes en relief
  */
 
 const features = [
@@ -66,24 +66,24 @@ function FeatureCard({
         delay: index * 0.1,
       }}
     >
-      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Métrique géante */}
         <div className="mb-6">
           <span className="font-titre text-4xl md:text-5xl font-bold text-fn-teal">
             {feature.metric}
           </span>
-          <span className="label-kainon block mt-2">
+          <span className="label-neu block mt-2">
             {feature.metricLabel}
           </span>
         </div>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+        <h3 className="font-accent font-semibold text-base text-fn-texte-titre mb-3 tracking-wide">
           {feature.titre}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow">
           {feature.description}
         </p>
       </div>
@@ -98,18 +98,7 @@ export default function Technologie() {
   return (
     <section
       id="technologie"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #16150F 15%,
-          #2A2214 35%,
-          #3D3018 50%,
-          #2A2214 65%,
-          #16150F 85%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond"
       aria-label="Section technologie"
     >
       <div className="max-w-7xl mx-auto">
@@ -122,8 +111,8 @@ export default function Technologie() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Technologie</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Technologie</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               La technologie
               <br />
               <span className="text-fn-teal">au service du vivant</span>
@@ -131,18 +120,18 @@ export default function Technologie() {
           </div>
           <div className="flex items-end">
             <div>
-              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed mb-4">
+              <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed mb-4">
                 Notre infrastructure repose sur les systèmes avancés de gestion
                 de serre, conçus pour maximiser la production tout en minimisant
                 l'empreinte environnementale.
               </p>
-              <p className="font-corps text-sm text-fn-gris">
+              <p className="font-corps text-sm text-fn-texte-muted">
                 Propulsé par{' '}
                 <Link
                   href="https://kainon.ca"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-accent font-medium text-fn-teal hover:text-fn-teal/80 transition-colors duration-300"
+                  className="font-accent font-medium text-fn-teal-fonce hover:text-fn-teal transition-colors duration-300"
                 >
                   Kainon Technologies
                 </Link>
@@ -152,10 +141,10 @@ export default function Technologie() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={feature.id} feature={feature} index={index} />
           ))}

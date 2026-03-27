@@ -13,8 +13,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Bouton v4 — style capsule Kainon
- * Bordures fines, transitions subtiles, variantes minimales
+ * Bouton v5 — style neumorphique
+ * Ombres en relief, effet enfoncé au clic
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -37,20 +37,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantClasses = {
       primary:
-        'btn-capsule bg-fn-teal text-fn-noir-profond font-semibold hover:bg-fn-teal/90 focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir-profond',
+        'btn-neu bg-fn-teal text-white font-semibold hover:bg-fn-teal-fonce focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-fond',
       secondary:
-        'btn-capsule bg-fn-orange text-white font-semibold hover:bg-fn-orange-doux focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir-profond',
+        'btn-neu bg-fn-orange text-white font-semibold hover:bg-fn-orange-doux focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-fond',
       ghost:
-        'btn-capsule border border-fn-gris-bordure-hover text-fn-gris-clair bg-transparent hover:text-fn-blanc hover:border-fn-gris focus-visible:ring-2 focus-visible:ring-fn-gris focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir-profond',
+        'btn-neu text-fn-texte-sub hover:text-fn-texte-titre focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-fond',
       outline:
-        'btn-capsule border border-fn-teal/40 text-fn-teal bg-transparent hover:bg-fn-teal/5 hover:border-fn-teal/60 focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir-profond',
+        'btn-neu text-fn-teal-fonce hover:text-fn-teal focus-visible:ring-2 focus-visible:ring-fn-teal focus-visible:ring-offset-2 focus-visible:ring-offset-fn-fond',
     };
 
     const disabledClasses = disabled
       ? 'opacity-40 cursor-not-allowed'
       : 'cursor-pointer';
 
-    const baseClasses = `inline-flex items-center justify-center whitespace-nowrap ${sizeClasses[size]} ${variantClasses[variant]} ${disabledClasses} ${className}`;
+    const baseClasses = `inline-flex items-center justify-center whitespace-nowrap rounded-full ${sizeClasses[size]} ${variantClasses[variant]} ${disabledClasses} ${className}`;
 
     if (href && !disabled) {
       return (

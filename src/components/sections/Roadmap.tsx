@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Roadmap v4 — Style Kainon
- * Timeline horizontale en cartes, phase actuelle en accent teal
+ * Roadmap v5 — Neumorphique
+ * Cartes de phases en relief, phase actuelle avec glow teal
  */
 
 const phases = [
@@ -79,18 +79,23 @@ function PhaseCard({
         delay: index * 0.08,
       }}
     >
-      <div className={`h-full p-6 md:p-8 rounded-2xl flex flex-col ${
+      <div className={`h-full flex flex-col ${
         phase.isCurrent
-          ? 'bg-fn-noir-carte border border-fn-teal/20'
-          : 'card-kainon'
+          ? 'card-neu-accent'
+          : 'card-neu'
       }`}>
         {/* Période + statut */}
         <div className="flex items-center justify-between mb-4">
-          <span className="label-kainon">
+          <span className="label-neu">
             {phase.period}
           </span>
           {phase.isCurrent && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fn-teal/10 text-fn-teal text-[11px] font-accent font-medium tracking-wide">
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fn-teal/15 text-fn-teal-fonce text-[11px] font-accent font-medium tracking-wide"
+              style={{
+                boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.05), -2px -2px 4px rgba(255, 255, 255, 0.6)'
+              }}
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-fn-teal animate-pulse-soft" />
               En cours
             </span>
@@ -104,26 +109,26 @@ function PhaseCard({
           {phase.number}
         </span>
         <h3 className={`font-accent font-semibold text-base mb-3 tracking-wide ${
-          phase.isCurrent ? 'text-fn-blanc' : 'text-fn-gris-clair'
+          phase.isCurrent ? 'text-fn-texte-titre' : 'text-fn-texte-sub'
         }`}>
           {phase.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow">
           {phase.description}
         </p>
 
-        {/* Barre de progression (phase actuelle) */}
+        {/* Barre de progression neumorphique (phase actuelle) */}
         {phase.isCurrent && (
           <div className="mt-5">
             <div className="flex justify-between mb-2">
-              <span className="label-kainon">Progression</span>
-              <span className="font-accent text-xs text-fn-teal">{phase.progress}%</span>
+              <span className="label-neu">Progression</span>
+              <span className="font-accent text-xs text-fn-teal-fonce">{phase.progress}%</span>
             </div>
-            <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+            <div className="inset-neu h-2 overflow-hidden">
               <motion.div
-                className="h-full rounded-full bg-fn-teal"
+                className="h-full rounded-xl bg-fn-teal"
                 initial={{ width: '0%' }}
                 animate={isInView ? { width: `${phase.progress}%` } : {}}
                 transition={{ duration: 1.5, ease: 'easeOut', delay: 0.5 }}
@@ -143,18 +148,7 @@ export default function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #151A10 15%,
-          #2D4A20 35%,
-          #2D4A20 50%,
-          #2D4A20 65%,
-          #151A10 85%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond"
       aria-label="Feuille de route du projet"
     >
       <div className="max-w-7xl mx-auto">
@@ -167,15 +161,15 @@ export default function Roadmap() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Roadmap</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Roadmap</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               Notre feuille
               <br />
               <span className="text-fn-teal">de route</span>
             </h2>
           </div>
           <div className="flex items-end">
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed">
               Un plan clair, des jalons concrets, une vision à long terme.
               Chaque phase est conçue pour construire sur les acquis de la précédente.
             </p>
@@ -183,10 +177,10 @@ export default function Roadmap() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille de phases */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {phases.map((phase, index) => (
             <PhaseCard key={phase.id} phase={phase} index={index} />
           ))}

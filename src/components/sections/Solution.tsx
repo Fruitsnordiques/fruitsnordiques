@@ -6,8 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Solution v4 — Style Kainon
- * 4 vocations, cartes minimales, numérotation typographique
+ * Solution v5 — Neumorphique
+ * 4 vocations, cartes en relief, numérotation typographique
  */
 
 const vocations = [
@@ -62,19 +62,19 @@ function VocationCard({
         delay: index * 0.1,
       }}
     >
-      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+      <div className="card-neu h-full flex flex-col">
         {/* Numéro */}
         <span className="font-titre text-4xl md:text-5xl font-bold text-fn-teal/30 mb-6">
           {vocation.number}
         </span>
 
         {/* Titre */}
-        <h3 className="font-accent font-semibold text-base md:text-lg text-fn-blanc mb-3 tracking-wide">
+        <h3 className="font-accent font-semibold text-base md:text-lg text-fn-texte-titre mb-3 tracking-wide">
           {vocation.titre}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-texte-muted leading-relaxed flex-grow">
           {vocation.description}
         </p>
       </div>
@@ -89,18 +89,7 @@ export default function Solution() {
   return (
     <section
       id="solution"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
-      style={{
-        background: `linear-gradient(180deg,
-          #0A0B0F 0%,
-          #10181A 12%,
-          #162822 30%,
-          #1E4A35 50%,
-          #162822 70%,
-          #10181A 88%,
-          #0A0B0F 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-fond-clair"
       aria-label="Section des quatre vocations"
     >
       <div className="max-w-7xl mx-auto">
@@ -113,15 +102,15 @@ export default function Solution() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div>
-            <span className="label-kainon block mb-5">Solution</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+            <span className="label-neu block mb-5">Solution</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-texte-titre leading-[1.02]">
               Un écosystème.
               <br />
               <span className="text-fn-teal">Quatre vocations.</span>
             </h2>
           </div>
           <div className="flex items-end">
-            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+            <p className="text-base md:text-lg font-corps text-fn-texte-sub leading-relaxed">
               Fruits Nordiques n'est pas une serre. C'est un écosystème
               complet au service de la communauté — production, formation,
               transformation et agriculture communautaire réunis sous un
@@ -131,10 +120,10 @@ export default function Solution() {
         </motion.div>
 
         {/* Séparateur */}
-        <div className="divider-kainon mb-12 md:mb-16" />
+        <div className="divider-neu mb-12 md:mb-16" />
 
         {/* Grille 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {vocations.map((vocation, index) => (
             <VocationCard
               key={vocation.id}
