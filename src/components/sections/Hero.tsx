@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 
 /**
- * Hero — Composition libre éditoriale
- * Cartes superellipse qui se chevauchent, props physiques décoratifs,
- * surfaces mates et satinées. Style organique matière.
+ * Hero — Composition éditoriale organique
+ * Colonne gauche : texte principal
+ * Colonne droite : trois cartes matière bien espacées avec contenu public pertinent
+ * Props physiques décoratifs en arrière-plan
  */
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,23 +51,21 @@ export default function Hero() {
     >
       {/* Fond — grande forme organique vert profond */}
       <div className="absolute inset-0" aria-hidden="true">
-        {/* Forme verte principale — couvre la moitié droite */}
         <div
           className="absolute top-[-10%] right-[-5%] w-[70%] h-[120%] bg-fn-vert-profond"
           style={{ borderRadius: '40% 0% 0% 40% / 45% 0% 0% 55%' }}
         />
-        {/* Zone de transition douce */}
         <div
           className="absolute top-[10%] right-[30%] w-[25%] h-[80%] bg-gradient-to-r from-transparent to-fn-vert-profond/40"
           style={{ borderRadius: '50%', filter: 'blur(80px)' }}
         />
       </div>
 
-      {/* Props décoratifs — objets physiques posés */}
+      {/* Props décoratifs — objets physiques */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Capsule ovale orange — haut droite */}
         <motion.div
-          className="absolute top-[18%] right-[12%] w-20 h-12 md:w-28 md:h-16 bg-fn-orange prop-capsule"
+          className="absolute top-[15%] right-[6%] w-16 h-10 md:w-20 md:h-12 bg-fn-orange prop-capsule"
           animate={{ y: [-4, 4, -4], rotate: [12, 14, 12] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           style={{ borderRadius: '50%' }}
@@ -74,7 +73,7 @@ export default function Hero() {
 
         {/* Capsule blanche mate — gauche milieu */}
         <motion.div
-          className="absolute top-[55%] left-[8%] w-16 h-10 md:w-24 md:h-14 bg-white prop-capsule"
+          className="absolute top-[55%] left-[8%] w-14 h-9 md:w-20 md:h-12 bg-white prop-capsule"
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           style={{ borderRadius: '50%' }}
@@ -82,29 +81,29 @@ export default function Hero() {
 
         {/* Petite sphère vert forêt — bas droite */}
         <motion.div
-          className="absolute bottom-[22%] right-[20%] w-10 h-10 md:w-14 md:h-14 bg-fn-vert-foret prop-oval"
+          className="absolute bottom-[25%] right-[22%] w-8 h-8 md:w-10 md:h-10 bg-fn-vert-foret prop-oval"
           animate={{ y: [0, -8, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
 
-        {/* Capsule crème allongée — haut gauche */}
+        {/* Capsule crème — haut gauche */}
         <motion.div
-          className="absolute top-[12%] left-[20%] w-12 h-7 md:w-16 md:h-10 bg-fn-cream-dark prop-capsule"
+          className="absolute top-[12%] left-[18%] w-10 h-6 md:w-14 md:h-8 bg-fn-cream-dark prop-capsule"
           animate={{ y: [0, -5, 0], rotate: [-8, -6, -8] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           style={{ borderRadius: '50%' }}
         />
       </div>
 
-      {/* Contenu principal — composition libre */}
+      {/* Contenu principal */}
       <motion.div
-        className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
         variants={containerVariants}
         initial="hidden"
         animate={isVisible ? 'visible' : 'hidden'}
       >
         {/* Colonne gauche — texte */}
-        <div className="lg:pr-8">
+        <div className="lg:pr-4">
           {/* Badge phase */}
           <motion.div variants={itemVariants} className="mb-6">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fn-cream-dark text-fn-vert-profond font-accent text-sm font-medium">
@@ -154,58 +153,53 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Colonne droite — cartes éditoriales superposées */}
+        {/* Colonne droite — trois cartes matière avec contenu pertinent */}
         <motion.div
-          className="relative hidden lg:block h-[480px]"
+          className="relative hidden lg:flex flex-col gap-5"
           variants={itemVariants}
         >
-          {/* Carte principale — vert forêt */}
+          {/* Carte 1 — chiffre clé */}
           <motion.div
-            className="absolute top-8 right-0 w-80 card-matte-dark p-8"
-            style={{ transform: 'rotate(-2deg)' }}
-            animate={{ y: [-3, 3, -3] }}
+            className="card-matte-dark p-7"
+            style={{ transform: 'rotate(-1.5deg)' }}
+            animate={{ y: [-2, 2, -2] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <h3 className="font-titre text-2xl text-white mb-3 leading-tight">
-              Visions
-            </h3>
-            <p className="font-corps text-sm text-white/70 leading-relaxed">
-              Un écosystème complet au service de la communauté, de la terre au consommateur.
+            <p className="font-accent text-xs text-white/50 tracking-wide mb-3">production annuelle visée</p>
+            <p className="font-titre text-4xl text-white font-bold mb-2">1 hectare</p>
+            <p className="font-corps text-sm text-white/65 leading-relaxed">
+              De serre intelligente pour nourrir les communautés du Québec, 12 mois par année.
             </p>
-            {/* Petits indicateurs de navigation */}
-            <div className="flex gap-1.5 mt-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-fn-orange" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-              <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
-            </div>
           </motion.div>
 
-          {/* Carte secondaire — blanche mate */}
+          {/* Carte 2 — mission */}
           <motion.div
-            className="absolute top-0 left-0 w-64 card-matte p-6"
-            style={{ transform: 'rotate(1.5deg)' }}
-            animate={{ y: [-2, 4, -2] }}
+            className="card-matte p-7"
+            style={{ transform: 'rotate(1deg)' }}
+            animate={{ y: [-2, 3, -2] }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           >
-            <p className="font-accent text-xs text-fn-gris-chaud tracking-wide mb-2">vision · couleurs</p>
+            <p className="font-accent text-xs text-fn-gris-chaud tracking-wide mb-3">quatre vocations</p>
             <p className="font-corps text-sm text-fn-noir/80 leading-relaxed">
-              Blanc crème, vert forêt, orange soleil — les couleurs de la terre et du vivant.
+              Production locale, agriculture communautaire, transformation alimentaire et formation de la relève.
             </p>
           </motion.div>
 
-          {/* Carte feature — en bas */}
+          {/* Carte 3 — appel */}
           <motion.div
-            className="absolute bottom-0 left-8 right-16 card-satin p-6"
+            className="card-satin p-7 flex items-center justify-between gap-4"
             style={{ transform: 'rotate(0.5deg)' }}
-            animate={{ y: [0, -4, 0] }}
+            animate={{ y: [0, -3, 0] }}
             transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           >
-            <p className="font-accent text-xs text-fn-gris-chaud tracking-wide mb-2">feature</p>
-            <p className="font-corps text-sm text-fn-noir/80 leading-relaxed mb-3">
-              Production locale, 12 mois par année, pour les communautés qui en ont besoin.
-            </p>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-fn-orange text-white text-xs font-accent font-semibold">
+            <div>
+              <p className="font-accent text-xs text-fn-gris-chaud tracking-wide mb-2">propulsé par</p>
+              <p className="font-accent text-base text-fn-vert-profond font-bold">Kainon Technologies</p>
+              <p className="font-corps text-sm text-fn-gris-chaud leading-relaxed mt-1">
+                Innovation au service du vivant
+              </p>
+            </div>
+            <span className="flex-shrink-0 inline-block px-4 py-1.5 rounded-full bg-fn-orange text-white text-xs font-accent font-semibold">
               en savoir plus
             </span>
           </motion.div>
