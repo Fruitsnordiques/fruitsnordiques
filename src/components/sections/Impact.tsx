@@ -6,70 +6,48 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Impact — Trois dimensions avec métriques et barres data
- * Style dashboard : indicateurs colorés, cartes sombres structurées
+ * Impact v4 — Style Kainon
+ * 3 colonnes, titres teal, bullet points discrets
  */
 
-interface ImpactCategory {
-  id: string;
-  title: string;
-  icon: string;
-  accent: string;
-  barColor: string;
-  bulletPoints: string[];
-  gridClass: string;
-}
-
-const impactCategories: ImpactCategory[] = [
+const impactCategories = [
   {
     id: 'economic',
-    title: 'Impact économique',
-    icon: '💰',
-    accent: 'text-fn-orange',
-    barColor: 'bg-fn-orange',
-    bulletPoints: [
+    title: 'Économique',
+    points: [
       "Création d'emplois directs permanents",
       "Stimulation de l'économie locale",
       'Filière de transformation à valeur ajoutée',
       'Modèle reproductible exportable',
     ],
-    gridClass: 'md:col-span-1 md:row-span-2',
   },
   {
     id: 'ecological',
-    title: 'Impact écologique',
-    icon: '🌍',
-    accent: 'text-fn-vert-vif',
-    barColor: 'bg-fn-vert-vif',
-    bulletPoints: [
+    title: 'Écologique',
+    points: [
       'Réduction des émissions de transport',
       'Bilan carbone maîtrisé (technologies Kainon)',
       "Gestion optimisée de l'eau",
       'Réduction du gaspillage alimentaire',
     ],
-    gridClass: 'md:col-span-1',
   },
   {
     id: 'social',
-    title: 'Impact social',
-    icon: '❤️',
-    accent: 'text-fn-rouge',
-    barColor: 'bg-fn-rouge',
-    bulletPoints: [
+    title: 'Social',
+    points: [
       'Sécurité alimentaire régionale renforcée',
       "Espace d'appartenance communautaire",
       'Formation et insertion professionnelle',
       'Accès aux aliments frais pour revenus modestes',
     ],
-    gridClass: 'md:col-span-1',
   },
 ];
 
-function ImpactCardComponent({
+function ImpactCard({
   category,
   index,
 }: {
-  category: ImpactCategory;
+  category: typeof impactCategories[0];
   index: number;
 }) {
   const ref = useRef(null);
@@ -78,8 +56,7 @@ function ImpactCardComponent({
   return (
     <motion.div
       ref={ref}
-      className={`${category.gridClass}`}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.6,
@@ -87,26 +64,25 @@ function ImpactCardComponent({
         delay: index * 0.1,
       }}
     >
-      <div className="h-full card-dark p-6 md:p-8 flex flex-col">
-        {/* Barre accent */}
-        <div className={`w-8 h-1 rounded-full ${category.barColor} mb-5`} />
+      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+        {/* Numéro décoratif */}
+        <span className="font-titre text-5xl md:text-6xl font-bold text-fn-teal/20 mb-4">
+          0{index + 1}
+        </span>
 
-        {/* Icône + titre */}
-        <div className="flex items-center gap-3 mb-5">
-          <span className="text-2xl" aria-hidden="true">{category.icon}</span>
-          <h3 className={`font-accent font-bold text-base md:text-lg ${category.accent}`}>
-            {category.title}
-          </h3>
-        </div>
+        {/* Titre */}
+        <h3 className="font-accent font-semibold text-base text-fn-teal mb-6 tracking-wide">
+          {category.title}
+        </h3>
 
         {/* Points */}
         <ul className="space-y-3 flex-grow">
-          {category.bulletPoints.map((point, idx) => (
+          {category.points.map((point, idx) => (
             <li
               key={idx}
               className="flex items-start font-corps text-sm text-fn-gris-clair"
             >
-              <span className={`inline-block w-1.5 h-1.5 rounded-full ${category.barColor} mr-3 mt-1.5 flex-shrink-0 opacity-60`} />
+              <span className="inline-block w-1 h-1 rounded-full bg-fn-teal/40 mr-3 mt-2 flex-shrink-0" />
               <span>{point}</span>
             </li>
           ))}
@@ -123,44 +99,41 @@ export default function Impact() {
   return (
     <section
       id="impact"
-      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir"
       aria-label="Section sur les trois dimensions d'impact"
-      style={{
-        background: `linear-gradient(180deg,
-          #0C0E14 0%,
-          #0F1610 12%,
-          #152A1C 30%,
-          #1A3A2A 50%,
-          #152A1C 70%,
-          #0F1610 88%,
-          #0C0E14 100%
-        )`,
-      }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Titre */}
+        {/* En-tête */}
         <motion.div
           ref={titleRef}
-          className="mb-12 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-1 rounded-full bg-fn-vert-vif" />
-            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Impact</span>
+          <div>
+            <span className="label-kainon block mb-5">Impact</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+              Un impact à
+              <br />
+              <span className="text-fn-teal">trois dimensions</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc leading-tight">
-            Un impact à
-            <br />
-            <span className="text-fn-vert-vif">trois dimensions</span>
-          </h2>
+          <div className="flex items-end">
+            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+              Chaque action génère des bénéfices économiques, écologiques et
+              sociaux — un cercle vertueux au service du territoire.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        {/* Séparateur */}
+        <div className="divider-kainon mb-12 md:mb-16" />
+
+        {/* Grille 3 colonnes */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           {impactCategories.map((category, index) => (
-            <ImpactCardComponent
+            <ImpactCard
               key={category.id}
               category={category}
               index={index}

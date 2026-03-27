@@ -7,53 +7,41 @@ import { useRef } from 'react';
 import Link from 'next/link';
 
 /**
- * Technologie — Dashboard data avec métriques tech
- * Cartes sombres élevées, indicateurs de performance
+ * Technologie v4 — Style Kainon
+ * Métriques énormes, cartes subtiles, lien Kainon en teal
  */
 
 const features = [
   {
     id: 'efficacite',
+    metric: '-40%',
+    metricLabel: 'Coûts énergie',
     titre: 'Efficacité énergétique',
     description:
-      'Réduction significative des coûts énergétiques par rapport aux serres conventionnelles',
-    icon: '⚡',
-    metric: '-40%',
-    metricLabel: 'coûts énergie',
-    accent: 'text-fn-jaune',
-    barColor: 'bg-fn-jaune',
+      'Réduction significative des coûts énergétiques par rapport aux serres conventionnelles.',
   },
   {
     id: 'monitoring',
-    titre: 'Monitoring en temps réel',
-    description: 'Optimisation des conditions de croissance par capteurs IoT',
-    icon: '📊',
     metric: '24/7',
-    metricLabel: 'surveillance',
-    accent: 'text-fn-vert-vif',
-    barColor: 'bg-fn-vert-vif',
+    metricLabel: 'Surveillance',
+    titre: 'Monitoring en temps réel',
+    description: 'Optimisation des conditions de croissance par capteurs IoT.',
   },
   {
     id: 'predictive',
+    metric: '+35%',
+    metricLabel: 'Rendement',
     titre: 'Gestion prédictive',
     description:
-      'Cycles de production optimisés par l\'intelligence des données',
-    icon: '🧠',
-    metric: '+35%',
-    metricLabel: 'rendement',
-    accent: 'text-fn-orange',
-    barColor: 'bg-fn-orange',
+      "Cycles de production optimisés par l'intelligence des données.",
   },
   {
     id: 'scalabilite',
+    metric: '∞',
+    metricLabel: 'Potentiel',
     titre: 'Scalabilité',
     description:
-      'Modèle reproductible vers d\'autres régions du Québec',
-    icon: '🚀',
-    metric: '∞',
-    metricLabel: 'potentiel',
-    accent: 'text-fn-bleu',
-    barColor: 'bg-fn-bleu',
+      "Modèle reproductible vers d'autres régions du Québec.",
   },
 ];
 
@@ -70,7 +58,7 @@ function FeatureCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.6,
@@ -78,30 +66,24 @@ function FeatureCard({
         delay: index * 0.1,
       }}
     >
-      <div className="h-full card-elevated p-6 md:p-8 flex flex-col group">
-        {/* Barre accent */}
-        <div className={`w-8 h-1 rounded-full ${feature.barColor} mb-5`} />
-
-        {/* Icône + métrique */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="w-11 h-11 rounded-xl bg-fn-noir-carte border border-fn-gris-bordure/40 flex items-center justify-center group-hover:border-fn-gris-bordure transition-colors">
-            <span className="text-xl">{feature.icon}</span>
-          </div>
-          <div className="text-right">
-            <span className={`font-accent text-2xl font-bold ${feature.accent}`}>
-              {feature.metric}
-            </span>
-            <p className="font-corps text-[10px] text-fn-gris-fonce">{feature.metricLabel}</p>
-          </div>
+      <div className="card-kainon p-6 md:p-8 h-full flex flex-col">
+        {/* Métrique géante */}
+        <div className="mb-6">
+          <span className="font-titre text-4xl md:text-5xl font-bold text-fn-teal">
+            {feature.metric}
+          </span>
+          <span className="label-kainon block mt-2">
+            {feature.metricLabel}
+          </span>
         </div>
 
         {/* Titre */}
-        <h3 className="text-base md:text-lg font-accent font-bold text-fn-blanc mb-2">
+        <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
           {feature.titre}
         </h3>
 
         {/* Description */}
-        <p className="text-sm font-corps text-fn-gris leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
           {feature.description}
         </p>
       </div>
@@ -116,72 +98,57 @@ export default function Technologie() {
   return (
     <section
       id="technologie"
-      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir-profond"
       aria-label="Section technologie"
-      style={{
-        background: `linear-gradient(180deg,
-          #0C0E14 0%,
-          #16150F 15%,
-          #2A2214 35%,
-          #3D3018 50%,
-          #2A2214 65%,
-          #16150F 85%,
-          #0C0E14 100%
-        )`,
-      }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* En-tête */}
+        {/* En-tête 2 colonnes */}
         <motion.div
           ref={titleRef}
-          className="mb-12 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-1 rounded-full bg-fn-orange" />
-            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Technologie</span>
+          <div>
+            <span className="label-kainon block mb-5">Technologie</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+              La technologie
+              <br />
+              <span className="text-fn-teal">au service du vivant</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc mb-5 leading-tight">
-            La technologie
-            <br />
-            <span className="text-fn-orange">au service du vivant</span>
-          </h2>
-
-          <p className="text-base md:text-lg font-corps text-fn-gris">
-            Propulsé par{' '}
-            <Link
-              href="https://kainon.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-accent font-semibold text-fn-orange hover:text-fn-orange-doux transition-colors duration-200"
-            >
-              Kainon Technologies
-            </Link>
-          </p>
+          <div className="flex items-end">
+            <div>
+              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed mb-4">
+                Notre infrastructure repose sur les systèmes avancés de gestion
+                de serre, conçus pour maximiser la production tout en minimisant
+                l'empreinte environnementale.
+              </p>
+              <p className="font-corps text-sm text-fn-gris">
+                Propulsé par{' '}
+                <Link
+                  href="https://kainon.ca"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-accent font-medium text-fn-teal hover:text-fn-teal/80 transition-colors duration-300"
+                >
+                  Kainon Technologies
+                </Link>
+              </p>
+            </div>
+          </div>
         </motion.div>
 
+        {/* Séparateur */}
+        <div className="divider-kainon mb-12 md:mb-16" />
+
         {/* Grille 2x2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {features.map((feature, index) => (
             <FeatureCard key={feature.id} feature={feature} index={index} />
           ))}
         </div>
-
-        {/* Citation */}
-        <motion.div
-          className="card-dark p-6 md:p-10 text-center border-fn-gris-bordure/40"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          <p className="text-base md:text-lg font-corps text-fn-gris-clair max-w-2xl mx-auto leading-relaxed italic">
-            « Notre approche intègre innovation technologique et respect du vivant
-            pour créer un écosystème durable et productif. »
-          </p>
-        </motion.div>
       </div>
     </section>
   );

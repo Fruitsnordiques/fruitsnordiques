@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 
 /**
- * En-tête dashboard — barre sombre, transition au scroll
- * Fond charcoal avec bordure subtile quand scrollé
+ * En-tête v4 — ultra-minimal Kainon
+ * Fond transparent → fond noir au scroll, bordure quasi invisible
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,26 +26,24 @@ export default function Header() {
       {/* Lien d'accessibilité */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-orange focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-teal focus:text-fn-noir-profond"
       >
         Sauter au contenu principal
       </a>
 
-      {/* En-tête fixe dark */}
+      {/* En-tête fixe */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-400 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
-            ? 'bg-fn-noir/95 border-b border-fn-gris-bordure/50 shadow-dark-md backdrop-blur-sm'
+            ? 'bg-fn-noir-profond/95 backdrop-blur-md border-b border-white/[0.04]'
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-4">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-5">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex-shrink-0 flex items-center gap-3">
-              {/* Indicateur de statut */}
-              <span className="w-2 h-2 rounded-full bg-fn-vert-vif animate-pulse-soft" />
-              <span className="font-accent text-xl sm:text-2xl font-bold text-fn-blanc tracking-tight">
+            {/* Logo — typographie simple */}
+            <div className="flex-shrink-0">
+              <span className="font-accent text-sm font-semibold text-fn-blanc tracking-[0.08em] uppercase">
                 Fruits Nordiques
               </span>
             </div>

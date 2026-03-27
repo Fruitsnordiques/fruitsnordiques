@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Solution from '@/components/sections/Solution'
 import CTA from '@/components/sections/CTA'
 
-/* Métadonnées pour la page Mission */
 export const metadata: Metadata = {
   title: 'Notre Mission',
   description:
@@ -15,132 +14,131 @@ export const metadata: Metadata = {
   },
 }
 
-/**
- * Page Mission — Présente la mission, vision et valeurs du projet
- * Includes small hero banner, detailed prose, reuse of Solution section, and CTA
- */
 export default function Mission() {
   return (
     <>
-      {/* Hero Banner — Petit, distinct de la page d'accueil */}
+      {/* Hero Banner */}
       <section
-        className="w-full py-20 bg-fn-vert-profond text-fn-neige"
+        className="w-full pt-32 pb-20 bg-fn-noir-profond"
         aria-label="En-tête de la page Mission"
       >
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold mb-4 leading-tight">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14">
+          <span className="label-kainon text-fn-teal block mb-5">Mission</span>
+          <h1 className="text-5xl md:text-6xl lg:text-8xl font-titre font-bold text-fn-gris-clair mb-6 leading-[1.02]">
             Notre Mission
           </h1>
-          <p className="text-lg md:text-xl font-corps text-fn-bleu-glace leading-relaxed">
+          <p className="text-lg md:text-xl font-corps text-fn-gris leading-relaxed max-w-2xl">
             Nourrir le Nord. Ensemble.
           </p>
         </div>
       </section>
 
-      {/* Section Mission détaillée */}
+      {/* Mission détaillée */}
       <section
-        className="w-full py-20 md:py-28 lg:py-32 bg-fn-neige"
+        className="w-full py-24 md:py-32 lg:py-40 bg-fn-noir"
         aria-label="Détails de la mission et de la vision"
       >
-        <div className="max-w-4xl mx-auto px-6 sm:px-8">
-          {/* Bloc Mission */}
-          <div className="mb-16 md:mb-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-vert-profond mb-6 leading-tight">
-              La Mission
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14">
+          {/* Mission */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20 md:mb-28">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+              La <span className="text-fn-teal">Mission</span>
             </h2>
-            <p className="text-lg md:text-xl font-corps text-fn-gris-moyen leading-relaxed mb-6">
-              Fruits Nordiques a pour mission de créer une infrastructure alimentaire
-              résiliente, inclusive et durable au cœur du Québec. Nous visons à répondre
-              aux enjeux de sécurité alimentaire, de création d'emplois et de renforcement
-              de la communauté par le biais d'une serre de production de 1 hectare à
-              vocations multiples.
-            </p>
-            <p className="text-lg md:text-xl font-corps text-fn-gris-moyen leading-relaxed">
-              Notre mission n'est pas seulement de produire des aliments frais et locaux,
-              mais de construire un écosystème d'apprentissage, d'engagement communautaire
-              et d'entrepreneuriat agricole. Nous croyons que l'alimentation est un droit
-              fondamental et que chacun devrait avoir accès à des aliments nutritifs,
-              indépendamment de son revenu ou de sa localisation géographique.
-            </p>
+            <div className="flex flex-col gap-6">
+              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+                Fruits Nordiques a pour mission de créer une infrastructure alimentaire
+                résiliente, inclusive et durable au cœur du Québec. Nous visons à répondre
+                aux enjeux de sécurité alimentaire, de création d'emplois et de renforcement
+                de la communauté par le biais d'une serre de production de 1 hectare à
+                vocations multiples.
+              </p>
+              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+                Notre mission n'est pas seulement de produire des aliments frais et locaux,
+                mais de construire un écosystème d'apprentissage, d'engagement communautaire
+                et d'entrepreneuriat agricole.
+              </p>
+            </div>
           </div>
 
-          {/* Bloc Vision */}
-          <div className="mb-16 md:mb-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-vert-profond mb-6 leading-tight">
-              La Vision
+          <div className="divider-kainon mb-20 md:mb-28" />
+
+          {/* Vision */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20 md:mb-28">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+              La <span className="text-fn-teal">Vision</span>
             </h2>
-            <p className="text-lg md:text-xl font-corps text-fn-gris-moyen leading-relaxed mb-6">
-              Nous imaginons un Québec où chaque région dispose d'une infrastructure alimentaire
-              locale, où la technologie serve l'agriculture plutôt que de la remplacer, et où
-              la communauté est au cœur de la production alimentaire.
-            </p>
-            <p className="text-lg md:text-xl font-corps text-fn-gris-moyen leading-relaxed">
-              D'ici 2030, le modèle Fruits Nordiques sera répliqué dans au moins cinq régions
-              du Québec, créant une véritable filière agroalimentaire locale, durable et
-              technologiquement avancée. Nous rêvons d'un avenir où la production alimentaire
-              locale n'est plus une exception mais une norme, et où chaque citoyen peut contribuer
-              à bâtir la résilience de sa communauté.
-            </p>
+            <div className="flex flex-col gap-6">
+              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+                Nous imaginons un Québec où chaque région dispose d'une infrastructure
+                alimentaire locale, où la technologie serve l'agriculture plutôt que de
+                la remplacer, et où la communauté est au cœur de la production alimentaire.
+              </p>
+              <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+                D'ici 2030, le modèle Fruits Nordiques sera répliqué dans au moins cinq
+                régions du Québec, créant une véritable filière agroalimentaire locale,
+                durable et technologiquement avancée.
+              </p>
+            </div>
           </div>
 
-          {/* Bloc Valeurs */}
-          <div className="mb-16 md:mb-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-vert-profond mb-6 leading-tight">
-              Nos Valeurs
+          <div className="divider-kainon mb-20 md:mb-28" />
+
+          {/* Valeurs */}
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02] mb-12">
+              Nos <span className="text-fn-teal">Valeurs</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Inclusivité */}
-              <div className="bg-white rounded-lg p-8 shadow-sm border-l-4 border-fn-vert-vif">
-                <h3 className="text-2xl font-accent font-bold text-fn-vert-profond mb-3">
-                  🤝 Inclusivité
-                </h3>
-                <p className="font-corps text-fn-gris-moyen leading-relaxed">
-                  Nous créons des opportunités d'accès à la terre, aux emplois et aux connaissances
-                  agricoles pour tous, indépendamment du statut socioéconomique.
-                </p>
-              </div>
+          </div>
 
-              {/* Durabilité */}
-              <div className="bg-white rounded-lg p-8 shadow-sm border-l-4 border-fn-vert-vif">
-                <h3 className="text-2xl font-accent font-bold text-fn-vert-profond mb-3">
-                  🌱 Durabilité
-                </h3>
-                <p className="font-corps text-fn-gris-moyen leading-relaxed">
-                  Nos pratiques minimisent l'impact environnemental tout en maximisant la
-                  productivité alimentaire pour les générations futures.
-                </p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            <div className="card-kainon p-6 md:p-8">
+              <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-4 block">01</span>
+              <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+                Inclusivité
+              </h3>
+              <p className="font-corps text-sm text-fn-gris leading-relaxed">
+                Nous créons des opportunités d'accès à la terre, aux emplois et aux connaissances
+                agricoles pour tous, indépendamment du statut socioéconomique.
+              </p>
+            </div>
 
-              {/* Innovation */}
-              <div className="bg-white rounded-lg p-8 shadow-sm border-l-4 border-fn-soleil">
-                <h3 className="text-2xl font-accent font-bold text-fn-vert-profond mb-3">
-                  💡 Innovation
-                </h3>
-                <p className="font-corps text-fn-gris-moyen leading-relaxed">
-                  Nous intégrons des technologies de pointe pour optimiser la production tout en
-                  restant ancrés dans l'agriculture biologique et respectueuse de la nature.
-                </p>
-              </div>
+            <div className="card-kainon p-6 md:p-8">
+              <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-4 block">02</span>
+              <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+                Durabilité
+              </h3>
+              <p className="font-corps text-sm text-fn-gris leading-relaxed">
+                Nos pratiques minimisent l'impact environnemental tout en maximisant la
+                productivité alimentaire pour les générations futures.
+              </p>
+            </div>
 
-              {/* Engagement Communautaire */}
-              <div className="bg-white rounded-lg p-8 shadow-sm border-l-4 border-fn-soleil">
-                <h3 className="text-2xl font-accent font-bold text-fn-vert-profond mb-3">
-                  ❤️ Engagement
-                </h3>
-                <p className="font-corps text-fn-gris-moyen leading-relaxed">
-                  Nous mettons la communauté au cœur de chaque décision, en créant des espaces
-                  d'apprentissage, d'échange et de prise d'initiative.
-                </p>
-              </div>
+            <div className="card-kainon p-6 md:p-8">
+              <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-4 block">03</span>
+              <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+                Innovation
+              </h3>
+              <p className="font-corps text-sm text-fn-gris leading-relaxed">
+                Nous intégrons des technologies de pointe pour optimiser la production tout en
+                restant ancrés dans l'agriculture biologique.
+              </p>
+            </div>
+
+            <div className="card-kainon p-6 md:p-8">
+              <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-4 block">04</span>
+              <h3 className="font-accent font-semibold text-base text-fn-blanc mb-3 tracking-wide">
+                Engagement
+              </h3>
+              <p className="font-corps text-sm text-fn-gris leading-relaxed">
+                Nous mettons la communauté au cœur de chaque décision, en créant des espaces
+                d'apprentissage, d'échange et de prise d'initiative.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Réutilisation de la section Solution */}
       <Solution />
-
-      {/* Appel à l'action */}
       <CTA />
     </>
   )

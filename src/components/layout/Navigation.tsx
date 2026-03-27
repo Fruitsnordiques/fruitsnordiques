@@ -12,12 +12,11 @@ const navLinks = [
   { label: 'Le Projet', href: '/projet' },
   { label: 'Impact', href: '/impact' },
   { label: 'Roadmap', href: '/roadmap' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 /**
- * Navigation — style dashboard dark
- * Accents orange sur actif, transitions rapides, menu mobile sombre
+ * Navigation v4 — style Kainon
+ * Liens discrets, bouton Contact avec bordure capsule
  */
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,51 +35,39 @@ export default function Navigation() {
     setIsOpen(false);
   };
 
-  const menuVariants = {
-    hidden: {
-      opacity: 0,
-      y: -12,
-      transition: { duration: 0.2 },
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.25 },
-    },
-  };
-
-  const linkVariants = {
-    hidden: { opacity: 0, x: -8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.04 },
-    }),
-  };
-
   return (
     <nav
       className="relative"
       aria-label="Navigation principale"
     >
       {/* Navigation Desktop */}
-      <ul className="hidden md:flex gap-1">
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className={`font-accent text-sm px-3 py-1.5 rounded-lg transition-all duration-200 ${
-                isActive(link.href)
-                  ? 'text-fn-orange bg-fn-orange/10'
-                  : 'text-fn-gris-clair hover:text-fn-blanc hover:bg-fn-blanc/5'
-              }`}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="hidden md:flex items-center gap-8">
+        <ul className="flex gap-8">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={`font-accent text-[13px] tracking-wide transition-colors duration-300 ${
+                  isActive(link.href)
+                    ? 'text-fn-blanc'
+                    : 'text-fn-gris hover:text-fn-blanc'
+                }`}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Bouton Contact — capsule bordée */}
+        <Link
+          href="/contact"
+          className="btn-capsule border border-fn-gris-bordure-hover text-fn-gris-clair px-5 py-2 text-[13px] font-accent tracking-wide hover:text-fn-blanc hover:border-fn-gris transition-all duration-300"
+        >
+          Contact
+        </Link>
+      </div>
 
       {/* Bouton Menu Mobile */}
       <button
@@ -101,35 +88,38 @@ export default function Navigation() {
       {isOpen && (
         <motion.div
           id="mobile-menu"
-          variants={menuVariants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className="fixed top-[64px] left-0 right-0 bg-fn-noir/98 border-b border-fn-gris-bordure/50 shadow-dark-lg md:hidden z-50"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+          className="fixed top-[72px] left-0 right-0 bg-fn-noir-profond/98 backdrop-blur-md border-b border-white/[0.04] md:hidden z-50"
         >
-          <ul className="flex flex-col p-3 gap-1">
-            {navLinks.map((link, index) => (
-              <motion.li
-                key={link.href}
-                custom={index}
-                variants={linkVariants}
-                initial="hidden"
-                animate="visible"
-              >
+          <ul className="flex flex-col p-6 gap-1">
+            {navLinks.map((link) => (
+              <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={handleLinkClick}
-                  className={`font-accent text-sm block px-4 py-2.5 rounded-xl transition-all duration-200 ${
+                  className={`font-accent text-sm block px-4 py-3 rounded-xl transition-colors duration-200 ${
                     isActive(link.href)
-                      ? 'bg-fn-orange/10 text-fn-orange'
-                      : 'text-fn-gris-clair hover:bg-fn-noir-eleve hover:text-fn-blanc'
+                      ? 'text-fn-blanc'
+                      : 'text-fn-gris hover:text-fn-blanc'
                   }`}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                 >
                   {link.label}
                 </Link>
-              </motion.li>
+              </li>
             ))}
+            <li>
+              <Link
+                href="/contact"
+                onClick={handleLinkClick}
+                className="font-accent text-sm block px-4 py-3 text-fn-teal"
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </motion.div>
       )}

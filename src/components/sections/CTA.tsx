@@ -7,38 +7,37 @@ import { useRef } from 'react';
 import Button from '@/components/ui/Button';
 
 /**
- * CTA — Section d'engagement finale
- * Fond noir profond, cartes élevées, boutons accent orange
- * Gradient subtle pour marquer la conclusion
+ * CTA v4 — Style Kainon
+ * Titre géant, 3 cartes action, fond légèrement distinct
  */
 
 const actions = [
   {
     id: 'investir',
-    icon: '💼',
+    number: '01',
     title: 'Investir',
-    description: 'Contribuez au financement d\'une infrastructure alimentaire durable et rentable.',
-    buttonText: 'Discuter d\'investissement',
+    description: "Contribuez au financement d'une infrastructure alimentaire durable et rentable.",
+    buttonText: "Discuter d'investissement",
     href: '/contact',
-    accent: 'bg-fn-orange',
+    variant: 'primary' as const,
   },
   {
     id: 'partenariat',
-    icon: '🤝',
+    number: '02',
     title: 'Devenir partenaire',
     description: 'Organismes, municipalités, entreprises : collaborons pour un impact concret.',
     buttonText: 'Proposer un partenariat',
     href: '/contact',
-    accent: 'bg-fn-vert-vif',
+    variant: 'outline' as const,
   },
   {
     id: 'newsletter',
-    icon: '📧',
+    number: '03',
     title: 'Rester informé',
     description: 'Recevez les nouvelles du projet et les jalons importants.',
-    buttonText: 'S\'inscrire',
+    buttonText: "S'inscrire",
     href: '/contact',
-    accent: 'bg-fn-bleu',
+    variant: 'ghost' as const,
   },
 ];
 
@@ -55,7 +54,7 @@ function ActionCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.6,
@@ -63,26 +62,25 @@ function ActionCard({
         delay: index * 0.1,
       }}
     >
-      <div className="h-full card-elevated p-6 lg:p-8 flex flex-col">
-        {/* Barre accent */}
-        <div className={`w-8 h-1 rounded-full ${action.accent} mb-5`} />
-
-        {/* Emoji */}
-        <div className="text-3xl md:text-4xl mb-4">{action.icon}</div>
+      <div className="card-kainon p-6 lg:p-8 h-full flex flex-col">
+        {/* Numéro */}
+        <span className="font-titre text-3xl font-bold text-fn-teal/30 mb-6">
+          {action.number}
+        </span>
 
         {/* Titre */}
-        <h3 className="text-lg md:text-xl font-accent font-bold text-fn-blanc mb-3">
+        <h3 className="font-accent font-semibold text-lg text-fn-blanc mb-3 tracking-wide">
           {action.title}
         </h3>
 
         {/* Description */}
-        <p className="text-sm font-corps text-fn-gris leading-relaxed flex-grow mb-6">
+        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow mb-8">
           {action.description}
         </p>
 
         {/* Bouton */}
         <Button
-          variant="primary"
+          variant={action.variant}
           size="md"
           href={action.href}
           className="w-full justify-center"
@@ -101,52 +99,32 @@ export default function CTA() {
   return (
     <section
       id="agir"
-      className="relative w-full py-20 md:py-28 lg:py-32 overflow-hidden px-5 sm:px-8"
-      style={{
-        background: `linear-gradient(180deg,
-          #0C0E14 0%,
-          #1A2A1A 20%,
-          #2A4025 40%,
-          #3D5030 55%,
-          #4A3D1E 70%,
-          #5A3818 80%,
-          #7A4A18 90%,
-          #1A3A2A 100%
-        )`,
-      }}
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir"
       aria-label="Appel à l'action — Engagez-vous"
     >
-      {/* Gradient décoratif subtil */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at 50% 30%, rgba(232, 134, 42, 0.04) 0%, transparent 60%)',
-          }}
-        />
-      </div>
-
-      {/* Contenu */}
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* En-tête */}
         <motion.div
           ref={titleRef}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-16 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc mb-5 leading-tight">
+          <span className="label-kainon block mb-5">Agir</span>
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair mb-6 leading-[1.02]">
             Prêt à bâtir l'avenir
             <br />
-            <span className="text-fn-orange">alimentaire du Québec ?</span>
+            <span className="text-fn-teal">alimentaire du Québec ?</span>
           </h2>
-
-          <p className="text-base md:text-lg font-corps text-fn-gris max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg font-corps text-fn-gris max-w-2xl mx-auto leading-relaxed">
             Que vous soyez investisseur, partenaire, organisme ou citoyen engagé —
             il y a une place pour vous dans ce projet.
           </p>
         </motion.div>
+
+        {/* Séparateur */}
+        <div className="divider-kainon mb-12 md:mb-16" />
 
         {/* Grille de cartes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">

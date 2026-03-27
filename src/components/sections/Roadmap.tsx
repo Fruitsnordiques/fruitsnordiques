@@ -6,54 +6,53 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Roadmap — Timeline dashboard avec nœuds et cartes status
- * Phase actuelle en card-accent orange, reste en card-dark
- * Indicateurs de progression visuels
+ * Roadmap v4 — Style Kainon
+ * Timeline horizontale en cartes, phase actuelle en accent teal
  */
 
 const phases = [
   {
     id: 0,
-    number: '0',
+    number: '00',
     title: 'Fondation',
     period: '2025–2026',
-    description: 'Étude de faisabilité, sélection du site, permis, design architectural, montage financier, partenariats fondateurs',
+    description: 'Étude de faisabilité, sélection du site, permis, design architectural, montage financier, partenariats fondateurs.',
     isCurrent: true,
     progress: 25,
   },
   {
     id: 1,
-    number: '1',
+    number: '01',
     title: 'Construction',
     period: '2026–2027',
-    description: 'Construction de la serre (1 ha), installation des systèmes Kainon, aménagement des espaces communautaires',
+    description: 'Construction de la serre (1 ha), installation des systèmes Kainon, aménagement des espaces communautaires.',
     isCurrent: false,
     progress: 0,
   },
   {
     id: 2,
-    number: '2',
+    number: '02',
     title: 'Lancement',
     period: '2027',
-    description: 'Première saison de production, ouverture des parcelles communautaires, lancement du programme de formation',
+    description: 'Première saison de production, ouverture des parcelles communautaires, lancement du programme de formation.',
     isCurrent: false,
     progress: 0,
   },
   {
     id: 3,
-    number: '3',
+    number: '03',
     title: 'Croissance',
     period: '2028–2029',
-    description: 'Rentabilité opérationnelle, expansion du programme de formation, développement de la cuisine communautaire',
+    description: 'Rentabilité opérationnelle, expansion du programme de formation, développement de la cuisine communautaire.',
     isCurrent: false,
     progress: 0,
   },
   {
     id: 4,
-    number: '4',
+    number: '04',
     title: 'Réplication',
     period: '2030+',
-    description: 'Exportation du modèle, licensing technologique Kainon, impact à l\'échelle provinciale',
+    description: "Exportation du modèle, licensing technologique Kainon, impact à l'échelle provinciale.",
     isCurrent: false,
     progress: 0,
   },
@@ -72,79 +71,66 @@ function PhaseCard({
   return (
     <motion.div
       ref={ref}
-      className="relative flex items-start gap-5 md:gap-6"
-      initial={{ opacity: 0, x: -16 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
         delay: index * 0.08,
       }}
     >
-      {/* Nœud timeline */}
-      <div className="relative flex-shrink-0 z-10">
-        <motion.div
-          className={`w-4 h-4 rounded-full border-2 ${
-            phase.isCurrent
-              ? 'bg-fn-orange border-fn-orange shadow-glow-orange'
-              : 'bg-fn-gris-fonce border-fn-gris-bordure'
-          }`}
-          animate={
-            phase.isCurrent
-              ? { scale: [1, 1.2, 1] }
-              : {}
-          }
-          transition={phase.isCurrent ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : {}}
-        />
-      </div>
-
-      {/* Carte */}
-      <div className={`flex-grow pb-8 ${index === phases.length - 1 ? 'pb-0' : ''}`}>
-        <div className={`rounded-2xl p-5 md:p-7 transition-all duration-400 ${
-          phase.isCurrent ? 'card-accent' : 'card-dark'
-        }`}>
-          {/* Badge période + progression */}
-          <div className="flex items-center justify-between mb-3">
-            <span className={`inline-block px-3 py-1 rounded-lg text-xs font-accent font-semibold ${
-              phase.isCurrent
-                ? 'bg-white/20 text-white'
-                : 'bg-fn-gris-bordure/50 text-fn-gris-clair'
-            }`}>
-              {phase.period}
-            </span>
-            {phase.isCurrent && (
-              <span className="text-xs font-accent font-semibold text-white/80">
-                {phase.progress}%
-              </span>
-            )}
-          </div>
-
-          {/* Titre */}
-          <h3 className={`text-base md:text-lg font-accent font-bold mb-2 ${
-            phase.isCurrent ? 'text-white' : 'text-fn-blanc'
-          }`}>
-            Phase {phase.number} — {phase.title}
-          </h3>
-
-          {/* Description */}
-          <p className={`text-sm font-corps leading-relaxed ${
-            phase.isCurrent ? 'text-white/85' : 'text-fn-gris'
-          }`}>
-            {phase.description}
-          </p>
-
-          {/* Barre de progression (phase actuelle uniquement) */}
+      <div className={`h-full p-6 md:p-8 rounded-2xl flex flex-col ${
+        phase.isCurrent
+          ? 'bg-fn-noir-carte border border-fn-teal/20'
+          : 'card-kainon'
+      }`}>
+        {/* Période + statut */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="label-kainon">
+            {phase.period}
+          </span>
           {phase.isCurrent && (
-            <div className="mt-4 h-1 rounded-full bg-white/20 overflow-hidden">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fn-teal/10 text-fn-teal text-[11px] font-accent font-medium tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-fn-teal animate-pulse-soft" />
+              En cours
+            </span>
+          )}
+        </div>
+
+        {/* Numéro + titre */}
+        <span className={`font-titre text-3xl font-bold mb-2 ${
+          phase.isCurrent ? 'text-fn-teal' : 'text-fn-teal/30'
+        }`}>
+          {phase.number}
+        </span>
+        <h3 className={`font-accent font-semibold text-base mb-3 tracking-wide ${
+          phase.isCurrent ? 'text-fn-blanc' : 'text-fn-gris-clair'
+        }`}>
+          {phase.title}
+        </h3>
+
+        {/* Description */}
+        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
+          {phase.description}
+        </p>
+
+        {/* Barre de progression (phase actuelle) */}
+        {phase.isCurrent && (
+          <div className="mt-5">
+            <div className="flex justify-between mb-2">
+              <span className="label-kainon">Progression</span>
+              <span className="font-accent text-xs text-fn-teal">{phase.progress}%</span>
+            </div>
+            <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
               <motion.div
-                className="h-full rounded-full bg-white/70"
+                className="h-full rounded-full bg-fn-teal"
                 initial={{ width: '0%' }}
                 animate={isInView ? { width: `${phase.progress}%` } : {}}
                 transition={{ duration: 1.5, ease: 'easeOut', delay: 0.5 }}
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -157,58 +143,42 @@ export default function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir-profond"
       aria-label="Feuille de route du projet"
-      style={{
-        background: `linear-gradient(180deg,
-          #0C0E14 0%,
-          #14180E 12%,
-          #1E3018 30%,
-          #2D4A20 50%,
-          #1E3018 70%,
-          #14180E 88%,
-          #0C0E14 100%
-        )`,
-      }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* En-tête */}
         <motion.div
           ref={titleRef}
-          className="mb-12 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-16 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-1 rounded-full bg-fn-jaune" />
-            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Roadmap</span>
+          <div>
+            <span className="label-kainon block mb-5">Roadmap</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-titre font-bold text-fn-gris-clair leading-[1.02]">
+              Notre feuille
+              <br />
+              <span className="text-fn-teal">de route</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc mb-5 leading-tight">
-            Notre feuille
-            <br />
-            <span className="text-fn-orange">de route</span>
-          </h2>
-
-          <p className="text-base md:text-lg font-corps text-fn-gris max-w-2xl leading-relaxed">
-            Un plan clair, des jalons concrets, une vision à long terme.
-          </p>
+          <div className="flex items-end">
+            <p className="text-base md:text-lg font-corps text-fn-gris leading-relaxed">
+              Un plan clair, des jalons concrets, une vision à long terme.
+              Chaque phase est conçue pour construire sur les acquis de la précédente.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Timeline verticale */}
-        <div className="relative pl-2">
-          {/* Ligne verticale */}
-          <div
-            className="absolute left-[7px] top-2 bottom-12 w-[2px] bg-gradient-to-b from-fn-orange via-fn-gris-bordure to-fn-gris-bordure/20 rounded-full"
-            aria-hidden="true"
-          />
+        {/* Séparateur */}
+        <div className="divider-kainon mb-12 md:mb-16" />
 
-          {/* Phases */}
-          <div className="flex flex-col">
-            {phases.map((phase, index) => (
-              <PhaseCard key={phase.id} phase={phase} index={index} />
-            ))}
-          </div>
+        {/* Grille de phases */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {phases.map((phase, index) => (
+            <PhaseCard key={phase.id} phase={phase} index={index} />
+          ))}
         </div>
       </div>
     </section>

@@ -1,25 +1,20 @@
 import React from 'react';
 
 interface CardProps {
-  /** Contenu de la carte */
   children: React.ReactNode;
-  /** Variante de surface dark dashboard */
-  variant?: 'dark' | 'elevated' | 'accent' | 'stat';
-  /** Classes CSS supplémentaires */
+  variant?: 'default' | 'accent' | 'stat';
   className?: string;
 }
 
 /**
- * Carte dashboard — surfaces sombres, bordures subtiles, accents data.
- * Quatre variantes : dark (standard), elevated (surélevée), accent (orange), stat (données).
+ * Carte v4 — style Kainon, surfaces subtiles
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, variant = 'dark', className = '' }, ref) => {
+  ({ children, variant = 'default', className = '' }, ref) => {
     const variants = {
-      dark: 'card-dark',
-      elevated: 'card-elevated',
-      accent: 'card-accent',
-      stat: 'card-stat',
+      default: 'card-kainon',
+      accent: 'card-kainon-accent',
+      stat: 'card-stat-kainon',
     };
 
     return (
