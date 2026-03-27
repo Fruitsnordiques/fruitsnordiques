@@ -123,8 +123,19 @@ export default function Impact() {
   return (
     <section
       id="impact"
-      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir-profond px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
       aria-label="Section sur les trois dimensions d'impact"
+      style={{
+        background: `linear-gradient(180deg,
+          #0C0E14 0%,
+          #0F1610 12%,
+          #152A1C 30%,
+          #1A3A2A 50%,
+          #152A1C 70%,
+          #0F1610 88%,
+          #0C0E14 100%
+        )`,
+      }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Titre */}

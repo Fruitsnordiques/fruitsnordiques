@@ -99,8 +99,19 @@ export default function Communaute() {
   return (
     <section
       id="communaute"
-      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
       aria-label="Section au coeur de la communauté"
+      style={{
+        background: `linear-gradient(180deg,
+          #0C0E14 0%,
+          #14140E 15%,
+          #22201A 35%,
+          #2E2818 50%,
+          #22201A 65%,
+          #14140E 85%,
+          #0C0E14 100%
+        )`,
+      }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Titre */}

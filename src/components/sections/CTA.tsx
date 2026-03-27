@@ -101,7 +101,19 @@ export default function CTA() {
   return (
     <section
       id="agir"
-      className="relative w-full py-20 md:py-28 lg:py-32 overflow-hidden bg-fn-noir-profond px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 overflow-hidden px-5 sm:px-8"
+      style={{
+        background: `linear-gradient(180deg,
+          #0C0E14 0%,
+          #1A2A1A 20%,
+          #2A4025 40%,
+          #3D5030 55%,
+          #4A3D1E 70%,
+          #5A3818 80%,
+          #7A4A18 90%,
+          #1A3A2A 100%
+        )`,
+      }}
       aria-label="Appel à l'action — Engagez-vous"
     >
       {/* Gradient décoratif subtil */}

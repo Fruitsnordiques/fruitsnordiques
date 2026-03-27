@@ -116,8 +116,19 @@ export default function Technologie() {
   return (
     <section
       id="technologie"
-      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 px-5 sm:px-8"
       aria-label="Section technologie"
+      style={{
+        background: `linear-gradient(180deg,
+          #0C0E14 0%,
+          #16150F 15%,
+          #2A2214 35%,
+          #3D3018 50%,
+          #2A2214 65%,
+          #16150F 85%,
+          #0C0E14 100%
+        )`,
+      }}
     >
       <div className="max-w-7xl mx-auto">
         {/* En-tête */}
