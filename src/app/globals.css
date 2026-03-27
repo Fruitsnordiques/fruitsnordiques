@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   Design System — Fruits Nordiques
+   =========================== */
+
+:root {
+  /* Primaires */
+  --fn-vert-profond:    #1A3A2A;
+  --fn-vert-vif:        #2D7A4F;
+  --fn-vert-clair:      #5BAD7A;
+
+  /* Secondaires */
+  --fn-terre:           #8B5E3C;
+  --fn-soleil:          #E8A020;
+  --fn-neige:           #F5F2EC;
+
+  /* Accents */
+  --fn-rouge-baie:      #C0392B;
+  --fn-bleu-glace:      #A8C8D8;
+
+  /* Neutres */
+  --fn-gris-fonce:      #2C2C2C;
+  --fn-gris-moyen:      #6B6B6B;
+  --fn-gris-clair:      #E8E8E8;
+}
+
+/* Typographie de base */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--fn-gris-fonce);
+  background-color: var(--fn-neige);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--fn-vert-profond);
+  line-height: 1.2;
+}
+
+/* Classes utilitaires */
+@layer components {
+  /* Conteneur principal */
+  .container-fn {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Sections */
+  .section-fn {
+    @apply py-16 md:py-24;
+  }
+
+  /* Texte gradient */
+  .text-gradient-fn {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-fn-vert-profond to-fn-vert-vif;
+  }
+
+  /* Focus visible pour accessibilité */
+  .focus-fn {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2;
+  }
+}
+
+/* Sélection de texte */
+::selection {
+  background-color: #5BAD7A40;
+  color: var(--fn-vert-profond);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fn-neige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fn-vert-clair);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fn-vert-vif);
+}
