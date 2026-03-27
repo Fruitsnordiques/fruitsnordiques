@@ -107,7 +107,7 @@ export default function Navigation() {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="absolute top-full left-0 right-0 mt-4 bg-fn-vert-profond rounded-lg shadow-lg md:hidden z-50"
+          className="fixed top-[72px] left-0 right-0 bg-fn-vert-profond shadow-lg md:hidden z-50"
         >
           <ul className="flex flex-col p-4 gap-2">
             {navLinks.map((link, index) => (
