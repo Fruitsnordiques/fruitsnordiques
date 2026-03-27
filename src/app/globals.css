@@ -4,6 +4,7 @@
 
 /* ===========================
    Design System — Fruits Nordiques
+   Style : Glassmorphisme organique + Bento Grid
    =========================== */
 
 :root {
@@ -25,13 +26,17 @@
   --fn-gris-fonce:      #2C2C2C;
   --fn-gris-moyen:      #6B6B6B;
   --fn-gris-clair:      #E8E8E8;
+
+  /* Nouveaux — glassmorphisme */
+  --fn-cream:           #FAF8F4;
+  --fn-warm-gray:       #E8E4DC;
 }
 
 /* Typographie de base */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--fn-gris-fonce);
-  background-color: var(--fn-neige);
+  background-color: var(--fn-cream);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,19 +45,19 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', Georgia, serif;
   color: var(--fn-vert-profond);
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 /* Classes utilitaires */
 @layer components {
   /* Conteneur principal */
   .container-fn {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-5 sm:px-8 lg:px-10;
   }
 
   /* Sections */
   .section-fn {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28 lg:py-36;
   }
 
   /* Texte gradient */
@@ -64,6 +69,69 @@ h1, h2, h3, h4 {
   .focus-fn {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2;
   }
+
+  /* === GLASSMORPHISME === */
+
+  /* Carte en verre clair — fond neige */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl rounded-4xl border border-white/60;
+    box-shadow:
+      0 8px 32px rgba(26, 58, 42, 0.06),
+      0 2px 8px rgba(26, 58, 42, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-card:hover {
+    box-shadow:
+      0 20px 48px rgba(26, 58, 42, 0.1),
+      0 8px 20px rgba(26, 58, 42, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  /* Carte en verre foncé — fond vert profond */
+  .glass-card-dark {
+    @apply backdrop-blur-xl rounded-4xl border border-white/10;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 58, 42, 0.9) 0%,
+      rgba(45, 122, 79, 0.8) 100%
+    );
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.2),
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Capsule flottante décorative */
+  .floating-capsule {
+    @apply rounded-full;
+    box-shadow:
+      0 12px 24px rgba(26, 58, 42, 0.15),
+      0 4px 8px rgba(26, 58, 42, 0.08),
+      inset 0 2px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Bouton capsule avec dégradé */
+  .btn-capsule {
+    @apply rounded-full font-accent font-semibold;
+    box-shadow:
+      0 4px 12px rgba(45, 122, 79, 0.25),
+      0 2px 4px rgba(45, 122, 79, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-capsule:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 20px rgba(45, 122, 79, 0.3),
+      0 4px 8px rgba(45, 122, 79, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-capsule:active {
+    transform: translateY(0);
+  }
 }
 
 /* Sélection de texte */
@@ -74,18 +142,23 @@ h1, h2, h3, h4 {
 
 /* Scrollbar personnalisée */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--fn-neige);
+  background: var(--fn-cream);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--fn-vert-clair);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--fn-vert-vif);
+}
+
+/* Transition globale douce */
+* {
+  scroll-behavior: smooth;
 }

@@ -6,18 +6,18 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Composant Impact — Section des trois dimensions d'impact
- * Affiche 3 colonnes d'impact (économique, écologique, social)
- * avec animations au scroll et accents de couleur distincts
- * Grille responsive : 1 col mobile, 3 cols desktop
+ * Impact — Trois dimensions dans un bento grid glassmorphique
+ * Cartes en verre avec accents de couleur distincts
  */
 
 interface ImpactCategory {
   id: string;
   title: string;
   emoji: string;
-  accentColor: string;
+  accentGradient: string;
+  accentBorder: string;
   bulletPoints: string[];
+  gridClass: string;
 }
 
 const impactCategories: ImpactCategory[] = [
@@ -25,43 +25,46 @@ const impactCategories: ImpactCategory[] = [
     id: 'economic',
     title: 'Impact économique',
     emoji: '💰',
-    accentColor: 'border-fn-soleil',
+    accentGradient: 'from-fn-soleil/15 to-fn-soleil/5',
+    accentBorder: 'border-fn-soleil/30',
     bulletPoints: [
       "Création d'emplois directs permanents",
       "Stimulation de l'économie locale",
       'Filière de transformation à valeur ajoutée',
       'Modèle reproductible exportable',
     ],
+    gridClass: 'md:col-span-1 md:row-span-2',
   },
   {
     id: 'ecological',
     title: 'Impact écologique',
     emoji: '🌍',
-    accentColor: 'border-fn-vert-vif',
+    accentGradient: 'from-fn-vert-clair/15 to-fn-vert-clair/5',
+    accentBorder: 'border-fn-vert-clair/30',
     bulletPoints: [
       'Réduction des émissions de transport',
       'Bilan carbone maîtrisé (technologies Kainon)',
       "Gestion optimisée de l'eau",
       'Réduction du gaspillage alimentaire',
     ],
+    gridClass: 'md:col-span-1',
   },
   {
     id: 'social',
     title: 'Impact social',
     emoji: '❤️',
-    accentColor: 'border-fn-rouge-baie',
+    accentGradient: 'from-fn-rouge-baie/10 to-fn-rouge-baie/5',
+    accentBorder: 'border-fn-rouge-baie/20',
     bulletPoints: [
       'Sécurité alimentaire régionale renforcée',
       "Espace d'appartenance communautaire",
       'Formation et insertion professionnelle',
       'Accès aux aliments frais pour revenus modestes',
     ],
+    gridClass: 'md:col-span-1',
   },
 ];
 
-/**
- * Composant de carte d'impact individuelle
- */
 function ImpactCardComponent({
   category,
   index,
@@ -70,48 +73,39 @@ function ImpactCardComponent({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-        delay: index * 0.15,
-      },
-    },
-  };
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <motion.div
       ref={ref}
-      className="h-full"
-      variants={cardVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
+      className={`${category.gridClass}`}
+      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+        delay: index * 0.12,
+      }}
     >
-      <div className={`h-full bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-8 flex flex-col border-t-4 ${category.accentColor}`}>
+      <div className={`h-full bg-gradient-to-br ${category.accentGradient} backdrop-blur-xl rounded-4xl border ${category.accentBorder} p-8 md:p-10 flex flex-col hover:translate-y-[-6px] transition-all duration-500`}>
         {/* Icône */}
-        <div className="text-5xl mb-4" aria-hidden="true">
+        <div className="text-5xl mb-5" aria-hidden="true">
           {category.emoji}
         </div>
 
         {/* Titre */}
-        <h3 className="font-accent font-bold text-xl md:text-2xl text-fn-gris-fonce mb-6">
+        <h3 className="font-accent font-bold text-xl md:text-2xl text-fn-vert-profond mb-6">
           {category.title}
         </h3>
 
-        {/* Points à puces */}
-        <ul className="space-y-3 flex-grow">
+        {/* Points */}
+        <ul className="space-y-4 flex-grow">
           {category.bulletPoints.map((point, idx) => (
             <li
               key={idx}
               className="flex items-start font-corps text-base text-fn-gris-moyen"
             >
-              <span className="inline-block w-2 h-2 rounded-full bg-fn-gris-moyen mr-3 mt-2 flex-shrink-0"></span>
+              <span className="inline-block w-2 h-2 rounded-full bg-fn-vert-vif/60 mr-3 mt-2 flex-shrink-0" />
               <span>{point}</span>
             </li>
           ))}
@@ -122,45 +116,37 @@ function ImpactCardComponent({
 }
 
 export default function Impact() {
-  const sectionRef = useRef(null);
   const titleRef = useRef(null);
-  const isTitleInView = useInView(titleRef, {
-    once: true,
-    margin: '-100px',
-  });
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
 
   return (
     <section
       id="impact"
-      ref={sectionRef}
-      className="relative w-full py-16 md:py-24 lg:py-32 bg-fn-neige px-6 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream px-5 sm:px-8"
       aria-label="Section sur les trois dimensions d'impact"
     >
+      {/* Décorations */}
+      <div className="absolute top-20 left-8 w-48 h-48 rounded-full bg-fn-soleil/5 blur-3xl" aria-hidden="true" />
+      <div className="absolute bottom-16 right-12 w-36 h-36 rounded-full bg-fn-vert-clair/6 blur-2xl" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto">
-        {/* Titre de la section */}
+        {/* Titre */}
         <motion.div
           ref={titleRef}
-          className="mb-12 md:mb-16 lg:mb-20"
-          variants={titleVariants}
-          initial="hidden"
-          animate={isTitleInView ? 'visible' : 'hidden'}
+          className="mb-14 md:mb-20"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-gris-fonce text-center max-w-3xl mx-auto leading-tight">
-            Un impact à trois dimensions
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond text-center leading-tight">
+            Un impact à
+            <br />
+            <span className="text-fn-vert-vif">trois dimensions</span>
           </h2>
         </motion.div>
 
-        {/* Grille de cartes d'impact */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* Bento Grid — 2 colonnes, première carte s'étend sur 2 rangées */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {impactCategories.map((category, index) => (
             <ImpactCardComponent
               key={category.id}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Style variant of the button */
-  variant?: 'primary' | 'secondary' | 'accent';
+  variant?: 'primary' | 'secondary' | 'accent' | 'ghost';
   /** Button size */
   size?: 'sm' | 'md' | 'lg';
   /** Optional link href for link-style button */
@@ -19,8 +19,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Bouton réutilisable avec plusieurs variantes et tailles.
- * Supporte les états hover, focus et disabled.
+ * Bouton capsule — forme arrondie, ombres profondes, effet tactile.
+ * Style inspiré du moodboard : dégradés subtils, sensation physique.
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -35,29 +35,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // Classes de taille
+    // Classes de taille — plus généreuses pour l'aspect capsule
     const sizeClasses = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2.5 text-base',
-      lg: 'px-6 py-3 text-lg',
+      sm: 'px-5 py-2 text-sm',
+      md: 'px-7 py-3 text-base',
+      lg: 'px-9 py-4 text-lg',
     };
 
-    // Classes de variante
+    // Classes de variante — capsule avec dégradés
     const variantClasses = {
       primary:
-        'bg-fn-vert-vif text-fn-neige hover:bg-fn-vert-profond focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2 active:bg-fn-vert-profond',
+        'btn-capsule bg-gradient-to-r from-fn-vert-vif to-fn-vert-profond text-white hover:from-fn-vert-profond hover:to-fn-vert-vif focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2',
       secondary:
-        'border-2 border-fn-vert-vif text-fn-vert-vif hover:bg-fn-vert-clair hover:text-fn-neige focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2 active:bg-fn-vert-vif',
+        'btn-capsule border-2 border-fn-vert-vif/30 text-fn-vert-profond bg-white/50 backdrop-blur-sm hover:bg-fn-vert-vif hover:text-white hover:border-fn-vert-vif focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2',
       accent:
-        'bg-fn-soleil text-fn-gris-fonce hover:bg-amber-600 focus-visible:ring-2 focus-visible:ring-fn-soleil focus-visible:ring-offset-2 active:bg-amber-700',
+        'btn-capsule bg-gradient-to-r from-fn-soleil to-amber-500 text-fn-gris-fonce hover:from-amber-500 hover:to-fn-soleil focus-visible:ring-2 focus-visible:ring-fn-soleil focus-visible:ring-offset-2',
+      ghost:
+        'rounded-full font-accent font-semibold border-2 border-white/30 text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/50 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2',
     };
 
     // Classes d'état désactivé
     const disabledClasses = disabled
       ? 'opacity-50 cursor-not-allowed'
-      : 'cursor-pointer transition-colors duration-200';
+      : 'cursor-pointer';
 
-    const baseClasses = `font-accent font-semibold rounded-lg inline-flex items-center justify-center whitespace-nowrap ${sizeClasses[size]} ${variantClasses[variant]} ${disabledClasses} ${className}`;
+    const baseClasses = `inline-flex items-center justify-center whitespace-nowrap ${sizeClasses[size]} ${variantClasses[variant]} ${disabledClasses} ${className}`;
 
     // Si href est fourni, utiliser le composant Link de Next.js
     if (href && !disabled) {

@@ -6,9 +6,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Composant Problematique — Section du défi alimentaire
- * Affiche 5 cartes de problèmes avec animations au scroll
- * Grille responsive : 1 col mobile, 2 cols md, 3 cols lg
+ * Problématique — Bento grid asymétrique
+ * Layout organique avec cartes de tailles variées
+ * Glassmorphisme + accents rouge baie
  */
 
 interface ProblemCard {
@@ -16,6 +16,8 @@ interface ProblemCard {
   emoji: string;
   title: string;
   description: string;
+  /** Position dans le bento grid */
+  gridClass: string;
 }
 
 const problems: ProblemCard[] = [
@@ -25,6 +27,7 @@ const problems: ProblemCard[] = [
     title: 'Déserts alimentaires',
     description:
       'Des millions de ménages en zones rurales et périurbaines ont un accès limité à des aliments frais, locaux et abordables.',
+    gridClass: 'md:col-span-2 md:row-span-2',
   },
   {
     id: 'dependance-importations',
@@ -32,6 +35,7 @@ const problems: ProblemCard[] = [
     title: 'Dépendance aux importations',
     description:
       "Une part significative des fruits et légumes consommés au Québec provient de l'extérieur du pays.",
+    gridClass: 'md:col-span-1',
   },
   {
     id: 'insecurite-alimentaire',
@@ -39,6 +43,7 @@ const problems: ProblemCard[] = [
     title: 'Insécurité alimentaire',
     description:
       'Les crises révèlent la fragilité du système alimentaire industriel.',
+    gridClass: 'md:col-span-1',
   },
   {
     id: 'declin-releve',
@@ -46,6 +51,7 @@ const problems: ProblemCard[] = [
     title: 'Déclin de la relève',
     description:
       'Le secteur agricole peine à attirer et former la prochaine génération.',
+    gridClass: 'md:col-span-1',
   },
   {
     id: 'chomage-jeunes',
@@ -53,12 +59,10 @@ const problems: ProblemCard[] = [
     title: 'Chômage chez les jeunes',
     description:
       "Des milliers de jeunes dans les régions manquent d'opportunités concrètes.",
+    gridClass: 'md:col-span-2',
   },
 ];
 
-/**
- * Composant de carte de problème
- */
 function ProblemCardComponent({
   card,
   index,
@@ -67,42 +71,39 @@ function ProblemCardComponent({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-        delay: index * 0.1,
-      },
-    },
-  };
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <motion.div
       ref={ref}
-      className="h-full"
-      variants={cardVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
+      className={`${card.gridClass}`}
+      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+        delay: index * 0.08,
+      }}
     >
-      <div className="h-full bg-white border-l-4 border-fn-rouge-baie rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 flex flex-col">
+      <div className={`h-full glass-card p-8 md:p-10 flex flex-col group cursor-default border-l-4 border-fn-rouge-baie/60 hover:border-fn-rouge-baie transition-all duration-500 ${
+        index === 0 ? 'md:p-12' : ''
+      }`}>
         {/* Icône emoji */}
-        <div className="text-4xl mb-4" aria-hidden="true">
+        <div className={`mb-5 ${index === 0 ? 'text-6xl' : 'text-4xl'}`} aria-hidden="true">
           {card.emoji}
         </div>
 
         {/* Titre */}
-        <h3 className="font-accent font-bold text-lg md:text-xl text-fn-gris-fonce mb-3">
+        <h3 className={`font-accent font-bold text-fn-vert-profond mb-3 ${
+          index === 0 ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'
+        }`}>
           {card.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-base text-fn-gris-moyen leading-relaxed flex-grow">
+        <p className={`font-corps text-fn-gris-moyen leading-relaxed flex-grow ${
+          index === 0 ? 'text-base md:text-lg' : 'text-base'
+        }`}>
           {card.description}
         </p>
       </div>
@@ -111,45 +112,37 @@ function ProblemCardComponent({
 }
 
 export default function Problematique() {
-  const sectionRef = useRef(null);
   const titleRef = useRef(null);
-  const isTitleInView = useInView(titleRef, {
-    once: true,
-    margin: '-100px',
-  });
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
 
   return (
     <section
       id="problematique"
-      ref={sectionRef}
-      className="relative w-full py-16 md:py-24 lg:py-32 bg-white px-6 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream px-5 sm:px-8"
       aria-label="Section sur le défi alimentaire du Québec"
     >
+      {/* Forme décorative flottante */}
+      <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-fn-rouge-baie/5 blur-2xl" aria-hidden="true" />
+      <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-fn-soleil/5 blur-2xl" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto">
-        {/* Titre de la section */}
+        {/* Titre */}
         <motion.div
           ref={titleRef}
-          className="mb-12 md:mb-16 lg:mb-20"
-          variants={titleVariants}
-          initial="hidden"
-          animate={isTitleInView ? 'visible' : 'hidden'}
+          className="mb-14 md:mb-20"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-gris-fonce text-center max-w-3xl mx-auto leading-tight">
-            Le défi alimentaire du Québec
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond text-center leading-tight">
+            Le défi alimentaire
+            <br />
+            <span className="text-fn-rouge-baie">du Québec</span>
           </h2>
         </motion.div>
 
-        {/* Grille de cartes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Bento Grid — 3 colonnes, tailles variées */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 auto-rows-auto">
           {problems.map((problem, index) => (
             <ProblemCardComponent
               key={problem.id}

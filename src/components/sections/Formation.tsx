@@ -6,10 +6,8 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Composant Formation — Section de formation de la relève
- * Section sombre et contrastée sur fond vert profond
- * Présente les programmes de formation et partenariats
- * Animations staggered au scroll
+ * Formation — Section sombre glassmorphique
+ * Cartes translucides flottantes sur surface verre vert profond
  */
 
 interface TrainingCard {
@@ -43,9 +41,6 @@ const trainingCards: TrainingCard[] = [
   },
 ];
 
-/**
- * Composant de carte de formation
- */
 function TrainingCardComponent({
   card,
   index,
@@ -54,42 +49,32 @@ function TrainingCardComponent({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-        delay: index * 0.15,
-      },
-    },
-  };
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <motion.div
       ref={ref}
-      className="h-full"
-      variants={cardVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
+      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+        delay: index * 0.12,
+      }}
     >
-      <div className="h-full bg-fn-vert-vif/10 backdrop-blur-sm rounded-lg p-8 border border-fn-vert-vif/30 hover:border-fn-vert-vif/60 transition-all duration-300 flex flex-col">
+      <div className="h-full bg-white/[0.07] backdrop-blur-md rounded-4xl border border-white/10 p-8 md:p-10 hover:bg-white/[0.12] hover:border-white/20 hover:translate-y-[-6px] transition-all duration-500 flex flex-col">
         {/* Icône */}
-        <div className="text-5xl mb-4" aria-hidden="true">
+        <div className="text-5xl mb-5" aria-hidden="true">
           {card.emoji}
         </div>
 
         {/* Titre */}
-        <h3 className="font-accent font-bold text-xl md:text-2xl text-fn-neige mb-4">
+        <h3 className="font-accent font-bold text-xl md:text-2xl text-white mb-4">
           {card.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-base text-fn-neige/90 leading-relaxed flex-grow">
+        <p className="font-corps text-base text-white/75 leading-relaxed flex-grow">
           {card.description}
         </p>
       </div>
@@ -98,87 +83,78 @@ function TrainingCardComponent({
 }
 
 export default function Formation() {
-  const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const contentRef = useRef(null);
-
-  const isTitleInView = useInView(titleRef, {
-    once: true,
-    margin: '-100px',
-  });
-
-  const isContentInView = useInView(contentRef, {
-    once: true,
-    margin: '-100px',
-  });
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut', delay: 0.2 },
-    },
-  };
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
+  const isContentInView = useInView(contentRef, { once: true, margin: '-80px' });
 
   return (
     <section
       id="formation"
-      ref={sectionRef}
-      className="relative w-full py-16 md:py-24 lg:py-32 bg-fn-vert-profond px-6 sm:px-8 overflow-hidden"
+      className="relative w-full py-20 md:py-28 lg:py-36 overflow-hidden"
       aria-label="Section de formation de la relève"
     >
-      {/* Décoration de fond subtle */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-fn-vert-vif rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-fn-bleu-glace rounded-full blur-3xl"></div>
+      {/* Fond vert profond */}
+      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-[#1E4A35] to-fn-vert-profond" />
+
+      {/* Décorations flottantes */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <motion.div
+          className="absolute top-[8%] right-[6%] w-48 h-48 rounded-full bg-fn-vert-clair/6 blur-3xl"
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-[12%] left-[4%] w-40 h-40 rounded-full bg-fn-bleu-glace/5 blur-3xl"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+        <motion.div
+          className="absolute top-[40%] right-[20%] w-8 h-8 rounded-full bg-fn-soleil/15 border border-fn-soleil/20"
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
       </div>
 
-      <div className="relative max-w-5xl mx-auto">
-        {/* Titre de la section */}
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+        {/* Titre */}
         <motion.div
           ref={titleRef}
           className="mb-8 md:mb-12"
-          variants={titleVariants}
-          initial="hidden"
-          animate={isTitleInView ? 'visible' : 'hidden'}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-titre font-bold text-fn-neige text-center leading-tight">
-            Former la relève.<br />Créer l'avenir.
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-white text-center leading-tight">
+            Former la relève.
+            <br />
+            <span className="text-fn-soleil">Créer l'avenir.</span>
           </h2>
         </motion.div>
 
         {/* Contenu descriptif */}
         <motion.div
           ref={contentRef}
-          className="mb-12 md:mb-16 space-y-6"
-          variants={contentVariants}
-          initial="hidden"
-          animate={isContentInView ? 'visible' : 'hidden'}
+          className="mb-14 md:mb-18 space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isContentInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
         >
-          <p className="font-corps text-lg text-fn-neige/95 leading-relaxed text-center max-w-3xl mx-auto">
+          <p className="font-corps text-lg text-white/85 leading-relaxed text-center max-w-3xl mx-auto">
             Fruits Nordiques offre un programme de formation en agronomie, horticulture,
             gestion de serre et entrepreneuriat agricole. Des connaissances pratiques qui
             préparent la relève à réussir dans le secteur agroalimentaire québécois.
           </p>
 
-          <div className="bg-fn-vert-clair/20 border border-fn-vert-clair/40 rounded-lg p-6 md:p-8">
-            <p className="font-corps text-base md:text-lg text-fn-neige mb-4">
-              <span className="font-accent font-semibold">Partenariats:</span> Nous collaborons avec
+          {/* Panneau translucide partenariats */}
+          <div className="bg-white/[0.06] backdrop-blur-md rounded-3xl border border-white/10 p-7 md:p-8">
+            <p className="font-corps text-base md:text-lg text-white/85 mb-4">
+              <span className="font-accent font-semibold text-fn-soleil">Partenariats :</span> Nous collaborons avec
               des établissements d'enseignement locaux (DEP, AEC, universitaire) pour assurer
               une formation alignée avec les besoins du marché.
             </p>
-            <p className="font-corps text-base md:text-lg text-fn-neige">
-              <span className="font-accent font-semibold">Priorité:</span> Jeunes, personnes sans
+            <p className="font-corps text-base md:text-lg text-white/85">
+              <span className="font-accent font-semibold text-fn-soleil">Priorité :</span> Jeunes, personnes sans
               emploi et en réorientation professionnelle trouvent ici une porte d'entrée vers
               une carrière significative.
             </p>
@@ -186,7 +162,7 @@ export default function Formation() {
         </motion.div>
 
         {/* Cartes de formation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {trainingCards.map((card, index) => (
             <TrainingCardComponent
               key={card.id}
