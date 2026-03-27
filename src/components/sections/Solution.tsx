@@ -89,7 +89,18 @@ export default function Solution() {
   return (
     <section
       id="solution"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
+      style={{
+        background: `linear-gradient(180deg,
+          #0A0B0F 0%,
+          #10181A 12%,
+          #162822 30%,
+          #1E4A35 50%,
+          #162822 70%,
+          #10181A 88%,
+          #0A0B0F 100%
+        )`,
+      }}
       aria-label="Section des quatre vocations"
     >
       <div className="max-w-7xl mx-auto">

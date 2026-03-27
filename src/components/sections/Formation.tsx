@@ -82,7 +82,18 @@ export default function Formation() {
   return (
     <section
       id="formation"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
+      style={{
+        background: `linear-gradient(180deg,
+          #0A0B0F 0%,
+          #101820 15%,
+          #163040 35%,
+          #163040 50%,
+          #163040 65%,
+          #101820 85%,
+          #0A0B0F 100%
+        )`,
+      }}
       aria-label="Section de formation de la relève"
     >
       <div className="max-w-7xl mx-auto">

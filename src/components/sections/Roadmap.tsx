@@ -143,7 +143,18 @@ export default function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir-profond"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
+      style={{
+        background: `linear-gradient(180deg,
+          #0A0B0F 0%,
+          #151A10 15%,
+          #2D4A20 35%,
+          #2D4A20 50%,
+          #2D4A20 65%,
+          #151A10 85%,
+          #0A0B0F 100%
+        )`,
+      }}
       aria-label="Feuille de route du projet"
     >
       <div className="max-w-7xl mx-auto">

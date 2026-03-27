@@ -96,7 +96,18 @@ export default function Problematique() {
   return (
     <section
       id="problematique"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir-profond"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
+      style={{
+        background: `linear-gradient(180deg,
+          #0A0B0F 0%,
+          #121820 15%,
+          #1A2A22 35%,
+          #1E3328 50%,
+          #1A2A22 65%,
+          #121820 85%,
+          #0A0B0F 100%
+        )`,
+      }}
       aria-label="Section sur le défi alimentaire du Québec"
     >
       <div className="max-w-7xl mx-auto">

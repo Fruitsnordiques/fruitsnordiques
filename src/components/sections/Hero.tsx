@@ -52,15 +52,37 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen w-full overflow-hidden flex items-center bg-fn-noir-profond"
+      className="relative min-h-screen w-full overflow-hidden flex items-center"
       aria-label="Section d'accueil principale"
+      style={{
+        background: `linear-gradient(180deg,
+          #1A3A2A 0%,
+          #1A3A2A 40%,
+          #1E4A35 55%,
+          #2D5A3A 62%,
+          #5A4A28 72%,
+          #8B5A1E 78%,
+          #E8862A 82%,
+          #C46A1E 86%,
+          #5A3212 90%,
+          #1A1510 94%,
+          #0A0B0F 100%
+        )`,
+      }}
     >
-      {/* Gradient subtil en haut */}
+      {/* Grille subtile + halo */}
       <div className="absolute inset-0" aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
+          }}
+        />
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse at 50% 0%, rgba(74, 191, 180, 0.04) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.03) 0%, transparent 50%)',
           }}
         />
       </div>

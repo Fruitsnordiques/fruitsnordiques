@@ -99,7 +99,21 @@ export default function CTA() {
   return (
     <section
       id="agir"
-      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14 bg-fn-noir"
+      className="relative w-full py-24 md:py-32 lg:py-40 px-6 sm:px-10 lg:px-14"
+      style={{
+        background: `linear-gradient(180deg,
+          #0A0B0F 0%,
+          #10181A 10%,
+          #162822 25%,
+          #1E4A35 40%,
+          #3D3018 55%,
+          #5A4A28 65%,
+          #8B5A1E 75%,
+          #E8862A 85%,
+          #5A3212 92%,
+          #1A3A2A 100%
+        )`,
+      }}
       aria-label="Appel à l'action — Engagez-vous"
     >
       <div className="max-w-7xl mx-auto">
