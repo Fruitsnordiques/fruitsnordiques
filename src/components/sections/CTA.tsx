@@ -8,8 +8,8 @@ import Button from '@/components/ui/Button';
 
 /**
  * CTA — Section d'engagement final
- * Trois cartes glassmorphiques blanches sur fond vert profond
- * Effet de profondeur avec capsules flottantes
+ * Cartes mates blanches sur fond vert forêt profond
+ * Props physiques décoratifs, boutons capsule orange
  */
 
 const actions = [
@@ -18,7 +18,7 @@ const actions = [
     icon: '💼',
     title: 'Investir',
     description: 'Contribuez au financement d\'une infrastructure alimentaire durable et rentable.',
-    buttonText: 'Discuter d\'investissement',
+    buttonText: 'discuter d\'investissement',
     href: '/contact',
   },
   {
@@ -26,7 +26,7 @@ const actions = [
     icon: '🤝',
     title: 'Devenir partenaire',
     description: 'Organismes, municipalités, entreprises : collaborons pour un impact concret.',
-    buttonText: 'Proposer un partenariat',
+    buttonText: 'proposer un partenariat',
     href: '/contact',
   },
   {
@@ -34,7 +34,7 @@ const actions = [
     icon: '📧',
     title: 'Rester informé',
     description: 'Recevez les nouvelles du projet et les jalons importants.',
-    buttonText: 'S\'inscrire',
+    buttonText: 's\'inscrire',
     href: '/contact',
   },
 ];
@@ -52,7 +52,7 @@ function ActionCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40, scale: 0.94 }}
+      initial={{ opacity: 0, y: 32, scale: 0.95 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{
         duration: 0.7,
@@ -60,7 +60,7 @@ function ActionCard({
         delay: index * 0.12,
       }}
     >
-      <div className="h-full bg-white/95 backdrop-blur-xl rounded-4xl p-8 lg:p-10 flex flex-col shadow-glass-xl hover:translate-y-[-8px] hover:shadow-[0_32px_72px_rgba(0,0,0,0.2)] transition-all duration-500">
+      <div className="h-full bg-white rounded-5xl p-8 lg:p-10 flex flex-col shadow-matte-xl hover:shadow-[0_32px_72px_rgba(0,0,0,0.18)] hover:translate-y-[-6px] transition-all duration-500">
         {/* Emoji */}
         <div className="text-5xl md:text-6xl mb-6">{action.icon}</div>
 
@@ -70,13 +70,13 @@ function ActionCard({
         </h3>
 
         {/* Description */}
-        <p className="text-base md:text-lg font-corps text-fn-gris-moyen leading-relaxed flex-grow mb-8">
+        <p className="text-base md:text-lg font-corps text-fn-gris-chaud leading-relaxed flex-grow mb-8">
           {action.description}
         </p>
 
-        {/* Bouton */}
+        {/* Bouton capsule orange */}
         <Button
-          variant="primary"
+          variant="accent"
           size="md"
           href={action.href}
           className="w-full justify-center"
@@ -98,28 +98,28 @@ export default function CTA() {
       className="relative w-full py-20 md:py-28 lg:py-36 overflow-hidden"
       aria-label="Appel à l'action — Engagez-vous"
     >
-      {/* Fond vert profond */}
-      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-[#1A4A30] to-fn-vert-profond" />
+      {/* Fond vert forêt profond mate */}
+      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-fn-vert-foret to-fn-vert-profond" />
 
-      {/* Éléments flottants décoratifs */}
+      {/* Props décoratifs physiques */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <motion.div
-          className="absolute top-[12%] right-[10%] w-28 h-28 rounded-full bg-fn-soleil/10 border border-fn-soleil/15"
-          animate={{ y: [0, -16, 0], rotate: [0, 5, 0] }}
+          className="absolute top-[14%] right-[10%] w-20 h-12 bg-fn-orange/15 prop-capsule"
+          style={{ borderRadius: '50%' }}
+          animate={{ y: [0, -10, 0], rotate: [8, 12, 8] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-[18%] left-[8%] w-20 h-20 rounded-full bg-white/[0.06] border border-white/10"
-          animate={{ y: [0, 12, 0] }}
+          className="absolute bottom-[20%] left-[8%] w-14 h-14 bg-white/[0.06] prop-oval"
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
         <motion.div
-          className="absolute top-[45%] left-[20%] w-10 h-10 rounded-full bg-fn-vert-clair/10 border border-fn-vert-clair/15"
-          animate={{ y: [0, -10, 0] }}
+          className="absolute top-[48%] left-[18%] w-8 h-5 bg-fn-cream/8 prop-capsule"
+          style={{ borderRadius: '50%' }}
+          animate={{ y: [0, -6, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
-        <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full bg-fn-vert-clair/5 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-56 h-56 rounded-full bg-fn-soleil/5 blur-3xl" />
       </div>
 
       {/* Contenu */}
@@ -135,10 +135,10 @@ export default function CTA() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-titre font-bold text-white mb-6 leading-tight">
             Prêt à bâtir l'avenir
             <br />
-            <span className="text-fn-soleil">alimentaire du Québec ?</span>
+            <span className="text-fn-orange">alimentaire du Québec ?</span>
           </h2>
 
-          <p className="text-lg md:text-xl lg:text-2xl font-corps text-white/75 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl font-corps text-white/65 max-w-3xl mx-auto leading-relaxed">
             Que vous soyez investisseur, partenaire, organisme ou citoyen engagé —
             il y a une place pour vous dans ce projet.
           </p>

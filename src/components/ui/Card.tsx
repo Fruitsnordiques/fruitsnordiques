@@ -3,24 +3,33 @@ import React from 'react';
 interface CardProps {
   /** Contenu de la carte */
   children: React.ReactNode;
-  /** Variante de style */
-  variant?: 'glass' | 'glass-dark' | 'solid';
-  /** Couleur d'accent en haut de la carte */
-  accentColor?: string;
+  /** Variante de surface */
+  variant?: 'matte' | 'matte-dark' | 'satin' | 'accent';
+  /** Légère inclinaison éditoriale */
+  tilt?: 'none' | 'left' | 'right' | 'soft';
   /** Classes CSS supplémentaires */
   className?: string;
 }
 
 /**
- * Carte glassmorphique — coins très arrondis, ombres profondes, surface en verre.
- * Trois variantes : glass (clair), glass-dark (vert foncé), solid (opaque blanc).
+ * Carte matière — surfaces mates et satinées, coins superellipse.
+ * Style éditorial organique : pas de glassmorphisme, pas de transparence.
+ * Quatre variantes : matte (blanc), matte-dark (vert forêt), satin (crème chaud), accent (orange).
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, variant = 'glass', accentColor, className = '' }, ref) => {
+  ({ children, variant = 'matte', tilt = 'none', className = '' }, ref) => {
     const variants = {
-      glass: 'glass-card',
-      'glass-dark': 'glass-card-dark',
-      solid: 'bg-white rounded-4xl shadow-glass',
+      matte: 'card-matte',
+      'matte-dark': 'card-matte-dark',
+      satin: 'card-satin',
+      accent: 'card-accent',
+    };
+
+    const tilts = {
+      none: '',
+      left: 'editorial-offset-left',
+      right: 'editorial-offset-right',
+      soft: 'editorial-tilt-soft',
     };
 
     return (
@@ -28,9 +37,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={`
           ${variants[variant]}
-          ${accentColor ? `border-t-4 ${accentColor}` : ''}
-          hover:translate-y-[-6px]
-          transition-all duration-500 ease-out
+          ${tilts[tilt]}
           ${className}
         `}
       >

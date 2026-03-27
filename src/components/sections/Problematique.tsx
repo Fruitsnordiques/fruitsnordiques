@@ -6,9 +6,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Problématique — Bento grid asymétrique
- * Layout organique avec cartes de tailles variées
- * Glassmorphisme + accents rouge baie
+ * Problématique — Composition éditoriale libre
+ * Cartes mates avec légère inclinaison, palette stricte
+ * Accent orange pour l'urgence au lieu de rouge
  */
 
 interface ProblemCard {
@@ -16,7 +16,6 @@ interface ProblemCard {
   emoji: string;
   title: string;
   description: string;
-  /** Position dans le bento grid */
   gridClass: string;
 }
 
@@ -77,7 +76,7 @@ function ProblemCardComponent({
     <motion.div
       ref={ref}
       className={`${card.gridClass}`}
-      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      initial={{ opacity: 0, y: 24, scale: 0.97 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{
         duration: 0.7,
@@ -85,7 +84,7 @@ function ProblemCardComponent({
         delay: index * 0.08,
       }}
     >
-      <div className={`h-full glass-card p-8 md:p-10 flex flex-col group cursor-default border-l-4 border-fn-rouge-baie/60 hover:border-fn-rouge-baie transition-all duration-500 ${
+      <div className={`h-full card-matte p-8 md:p-10 flex flex-col group cursor-default border-l-4 border-fn-orange/40 hover:border-fn-orange transition-all duration-500 ${
         index === 0 ? 'md:p-12' : ''
       }`}>
         {/* Icône emoji */}
@@ -101,7 +100,7 @@ function ProblemCardComponent({
         </h3>
 
         {/* Description */}
-        <p className={`font-corps text-fn-gris-moyen leading-relaxed flex-grow ${
+        <p className={`font-corps text-fn-gris-chaud leading-relaxed flex-grow ${
           index === 0 ? 'text-base md:text-lg' : 'text-base'
         }`}>
           {card.description}
@@ -121,9 +120,9 @@ export default function Problematique() {
       className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream px-5 sm:px-8"
       aria-label="Section sur le défi alimentaire du Québec"
     >
-      {/* Forme décorative flottante */}
-      <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-fn-rouge-baie/5 blur-2xl" aria-hidden="true" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full bg-fn-soleil/5 blur-2xl" aria-hidden="true" />
+      {/* Props décoratifs */}
+      <div className="absolute top-16 right-12 w-16 h-10 bg-fn-orange/10 prop-capsule" style={{ borderRadius: '50%' }} aria-hidden="true" />
+      <div className="absolute bottom-20 left-10 w-12 h-12 bg-fn-vert-profond/5 prop-oval" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto">
         {/* Titre */}
@@ -137,11 +136,11 @@ export default function Problematique() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond text-center leading-tight">
             Le défi alimentaire
             <br />
-            <span className="text-fn-rouge-baie">du Québec</span>
+            <span className="text-fn-orange">du Québec</span>
           </h2>
         </motion.div>
 
-        {/* Bento Grid — 3 colonnes, tailles variées */}
+        {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 auto-rows-auto">
           {problems.map((problem, index) => (
             <ProblemCardComponent

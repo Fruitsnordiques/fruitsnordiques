@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 
 /**
- * En-tête glassmorphique — flottant avec backdrop blur
- * Effet de transparence qui laisse voir le contenu derrière
+ * En-tête éditorial — mate, flottant sur fond crème ou vert
+ * Transition douce au scroll, pas de glassmorphisme
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,19 +23,19 @@ export default function Header() {
 
   return (
     <>
-      {/* Lien d'accessibilité pour sauter au contenu principal */}
+      {/* Lien d'accessibilité */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-vert-vif focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-vert-moyen focus:text-white"
       >
         Sauter au contenu principal
       </a>
 
-      {/* En-tête glassmorphique flottant */}
+      {/* En-tête flottant mate */}
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
-            ? 'bg-fn-vert-profond/85 backdrop-blur-xl shadow-glass-lg'
+            ? 'bg-fn-vert-profond/95 shadow-matte-lg'
             : 'bg-transparent'
         }`}
       >

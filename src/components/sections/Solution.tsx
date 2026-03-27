@@ -6,9 +6,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Solution — Bento grid avec surfaces en verre
- * 4 vocations dans un layout asymétrique organique
- * Mix de cartes claires et d'une carte en verre foncé
+ * Solution — Quatre vocations en cartes matière
+ * Mix de surfaces mates claires, sombres et accent orange
+ * Composition éditoriale avec légers décalages
  */
 
 const vocations = [
@@ -61,28 +61,28 @@ function VocationCard({
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   const cardStyles = {
-    dark: 'glass-card-dark text-white',
-    light: 'glass-card',
-    accent: 'bg-gradient-to-br from-fn-soleil/10 to-fn-terre/5 backdrop-blur-xl rounded-4xl border border-fn-soleil/20',
+    dark: 'card-matte-dark text-white',
+    light: 'card-matte',
+    accent: 'card-accent text-white',
   };
 
   const titleColor = {
     dark: 'text-white',
     light: 'text-fn-vert-profond',
-    accent: 'text-fn-vert-profond',
+    accent: 'text-white',
   };
 
   const descColor = {
     dark: 'text-white/80',
-    light: 'text-fn-gris-moyen',
-    accent: 'text-fn-gris-moyen',
+    light: 'text-fn-gris-chaud',
+    accent: 'text-white/90',
   };
 
   return (
     <motion.div
       ref={ref}
       className={vocation.gridClass}
-      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      initial={{ opacity: 0, y: 24, scale: 0.97 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{
         duration: 0.7,
@@ -90,7 +90,7 @@ function VocationCard({
         delay: index * 0.1,
       }}
     >
-      <div className={`h-full ${cardStyles[vocation.variant]} p-8 md:p-10 lg:p-12 flex flex-col hover:translate-y-[-6px] transition-all duration-500`}>
+      <div className={`h-full ${cardStyles[vocation.variant]} p-8 md:p-10 lg:p-12 flex flex-col`}>
         {/* Emoji */}
         <div className="text-5xl md:text-6xl mb-6" aria-hidden="true">
           {vocation.emoji}
@@ -117,12 +117,12 @@ export default function Solution() {
   return (
     <section
       id="solution"
-      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-neige px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream-dark px-5 sm:px-8"
       aria-label="Section des quatre vocations"
     >
-      {/* Décorations */}
-      <div className="absolute top-32 left-8 w-24 h-24 rounded-full bg-fn-vert-clair/8 blur-xl" aria-hidden="true" />
-      <div className="absolute bottom-24 right-12 w-36 h-36 rounded-full bg-fn-soleil/6 blur-2xl" aria-hidden="true" />
+      {/* Props décoratifs */}
+      <div className="absolute top-28 left-8 w-10 h-10 bg-fn-vert-profond/5 prop-oval" aria-hidden="true" />
+      <div className="absolute bottom-20 right-12 w-14 h-8 bg-fn-orange/8 prop-capsule" style={{ borderRadius: '50%' }} aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto">
         {/* En-tête */}
@@ -136,16 +136,16 @@ export default function Solution() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond mb-6 leading-tight">
             Un écosystème.
             <br />
-            <span className="text-fn-vert-vif">Quatre vocations.</span>
+            <span className="text-fn-vert-moyen">Quatre vocations.</span>
           </h2>
 
-          <p className="text-lg md:text-xl font-corps text-fn-gris-moyen max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl font-corps text-fn-gris-chaud max-w-3xl mx-auto leading-relaxed">
             Fruits Nordiques n'est pas une serre. C'est un écosystème complet au
             service de la communauté.
           </p>
         </motion.div>
 
-        {/* Bento Grid — 3 colonnes */}
+        {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {vocations.map((vocation, index) => (
             <VocationCard

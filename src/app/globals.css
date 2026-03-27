@@ -4,38 +4,28 @@
 
 /* ===========================
    Design System — Fruits Nordiques
-   Style : Glassmorphisme organique + Bento Grid
+   Style : Éditorial Organique Matière
    =========================== */
 
 :root {
-  /* Primaires */
-  --fn-vert-profond:    #1A3A2A;
-  --fn-vert-vif:        #2D7A4F;
-  --fn-vert-clair:      #5BAD7A;
-
-  /* Secondaires */
-  --fn-terre:           #8B5E3C;
-  --fn-soleil:          #E8A020;
-  --fn-neige:           #F5F2EC;
-
-  /* Accents */
-  --fn-rouge-baie:      #C0392B;
-  --fn-bleu-glace:      #A8C8D8;
-
-  /* Neutres */
-  --fn-gris-fonce:      #2C2C2C;
-  --fn-gris-moyen:      #6B6B6B;
-  --fn-gris-clair:      #E8E8E8;
-
-  /* Nouveaux — glassmorphisme */
-  --fn-cream:           #FAF8F4;
-  --fn-warm-gray:       #E8E4DC;
+  /* Palette stricte */
+  --fn-vert-profond:   #1A3A2A;
+  --fn-vert-foret:     #1E4A35;
+  --fn-vert-moyen:     #2D7A4F;
+  --fn-orange:         #E8862A;
+  --fn-orange-doux:    #F0A050;
+  --fn-cream:          #FAF8F4;
+  --fn-cream-dark:     #F0EDE6;
+  --fn-blanc:          #FFFFFF;
+  --fn-noir:           #1A1A1A;
+  --fn-gris-chaud:     #6B6560;
+  --fn-gris-clair:     #B5B0A8;
 }
 
 /* Typographie de base */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--fn-gris-fonce);
+  color: var(--fn-noir);
   background-color: var(--fn-cream);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -45,10 +35,10 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', Georgia, serif;
   color: var(--fn-vert-profond);
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
-/* Classes utilitaires */
+/* === CLASSES UTILITAIRES === */
 @layer components {
   /* Conteneur principal */
   .container-fn {
@@ -60,89 +50,140 @@ h1, h2, h3, h4 {
     @apply py-20 md:py-28 lg:py-36;
   }
 
-  /* Texte gradient */
-  .text-gradient-fn {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-fn-vert-profond to-fn-vert-vif;
+  /* === SURFACES MATIÈRE === */
+
+  /* Carte mate claire — surface crème satinée */
+  .card-matte {
+    @apply bg-white rounded-5xl shadow-matte-md;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Focus visible pour accessibilité */
-  .focus-fn {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-vert-vif focus-visible:ring-offset-2;
+  .card-matte:hover {
+    @apply shadow-matte-lg;
+    transform: translateY(-4px);
   }
 
-  /* === GLASSMORPHISME === */
-
-  /* Carte en verre clair — fond neige */
-  .glass-card {
-    @apply bg-white/70 backdrop-blur-xl rounded-4xl border border-white/60;
-    box-shadow:
-      0 8px 32px rgba(26, 58, 42, 0.06),
-      0 2px 8px rgba(26, 58, 42, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  .glass-card:hover {
-    box-shadow:
-      0 20px 48px rgba(26, 58, 42, 0.1),
-      0 8px 20px rgba(26, 58, 42, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  /* Carte en verre foncé — fond vert profond */
-  .glass-card-dark {
-    @apply backdrop-blur-xl rounded-4xl border border-white/10;
+  /* Carte mate foncée — vert forêt profond */
+  .card-matte-dark {
+    @apply rounded-5xl;
     background: linear-gradient(
-      135deg,
-      rgba(26, 58, 42, 0.9) 0%,
-      rgba(45, 122, 79, 0.8) 100%
+      145deg,
+      #1A3A2A 0%,
+      #1E4A35 50%,
+      #1A3A2A 100%
     );
     box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.2),
-      0 4px 16px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      0 20px 60px rgba(0, 0, 0, 0.25),
+      0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Capsule flottante décorative */
-  .floating-capsule {
-    @apply rounded-full;
+  .card-matte-dark:hover {
+    transform: translateY(-4px);
     box-shadow:
-      0 12px 24px rgba(26, 58, 42, 0.15),
-      0 4px 8px rgba(26, 58, 42, 0.08),
-      inset 0 2px 0 rgba(255, 255, 255, 0.2);
+      0 28px 72px rgba(0, 0, 0, 0.3),
+      0 12px 32px rgba(0, 0, 0, 0.15);
   }
 
-  /* Bouton capsule avec dégradé */
+  /* Carte satinée — surface légèrement dorée/chaude */
+  .card-satin {
+    @apply rounded-5xl;
+    background: linear-gradient(
+      145deg,
+      #FAF8F4 0%,
+      #F5F0E8 100%
+    );
+    box-shadow:
+      0 8px 32px rgba(26, 58, 42, 0.07),
+      0 2px 8px rgba(26, 58, 42, 0.03);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-satin:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 16px 48px rgba(26, 58, 42, 0.1),
+      0 4px 16px rgba(26, 58, 42, 0.06);
+  }
+
+  /* Carte orange accent */
+  .card-accent {
+    @apply rounded-5xl;
+    background: linear-gradient(
+      145deg,
+      #F0A050 0%,
+      #E8862A 100%
+    );
+    box-shadow:
+      0 12px 36px rgba(232, 134, 42, 0.2),
+      0 4px 12px rgba(232, 134, 42, 0.1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-accent:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 48px rgba(232, 134, 42, 0.25),
+      0 8px 20px rgba(232, 134, 42, 0.12);
+  }
+
+  /* === BOUTON CAPSULE === */
   .btn-capsule {
     @apply rounded-full font-accent font-semibold;
-    box-shadow:
-      0 4px 12px rgba(45, 122, 79, 0.25),
-      0 2px 4px rgba(45, 122, 79, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .btn-capsule:hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 8px 20px rgba(45, 122, 79, 0.3),
-      0 4px 8px rgba(45, 122, 79, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   .btn-capsule:active {
     transform: translateY(0);
   }
+
+  /* === PROPS DÉCORATIFS — formes organiques physiques === */
+  .prop-capsule {
+    @apply rounded-full;
+    box-shadow:
+      0 8px 24px rgba(26, 58, 42, 0.12),
+      0 2px 8px rgba(26, 58, 42, 0.06);
+  }
+
+  .prop-oval {
+    border-radius: 50%;
+    box-shadow:
+      0 8px 24px rgba(26, 58, 42, 0.12),
+      0 2px 8px rgba(26, 58, 42, 0.06);
+  }
+
+  /* === COMPOSITION LIBRE === */
+  .editorial-offset-left {
+    transform: rotate(-2deg);
+  }
+
+  .editorial-offset-right {
+    transform: rotate(1.5deg);
+  }
+
+  .editorial-tilt-soft {
+    transform: rotate(-1deg);
+  }
+
+  /* Focus visible pour accessibilité */
+  .focus-fn {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-vert-moyen focus-visible:ring-offset-2;
+  }
 }
 
 /* Sélection de texte */
 ::selection {
-  background-color: #5BAD7A40;
+  background-color: rgba(232, 134, 42, 0.2);
   color: var(--fn-vert-profond);
 }
 
 /* Scrollbar personnalisée */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -150,12 +191,12 @@ h1, h2, h3, h4 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--fn-vert-clair);
+  background: var(--fn-gris-clair);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--fn-vert-vif);
+  background: var(--fn-gris-chaud);
 }
 
 /* Transition globale douce */

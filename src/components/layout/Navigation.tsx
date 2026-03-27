@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-// Navigation links structure
 const navLinks = [
   { label: 'Accueil', href: '/' },
   { label: 'Mission', href: '/mission' },
@@ -17,8 +16,8 @@ const navLinks = [
 ];
 
 /**
- * Composant de navigation principal avec support du menu mobile
- * Gère la navigation responsive avec animation du menu hamburger
+ * Navigation — style éditorial mate
+ * Typographie lowercase, accents orange
  */
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +36,6 @@ export default function Navigation() {
     setIsOpen(false);
   };
 
-  // Variants pour l'animation Framer Motion du menu mobile
   const menuVariants = {
     hidden: {
       opacity: 0,
@@ -73,8 +71,8 @@ export default function Navigation() {
               href={link.href}
               className={`font-accent text-sm transition-colors duration-200 pb-1 border-b-2 ${
                 isActive(link.href)
-                  ? 'text-fn-soleil border-fn-soleil'
-                  : 'text-fn-neige border-b-transparent hover:text-fn-soleil hover:border-fn-soleil'
+                  ? 'text-fn-orange border-fn-orange'
+                  : 'text-white/80 border-b-transparent hover:text-fn-orange hover:border-fn-orange'
               }`}
               aria-current={isActive(link.href) ? 'page' : undefined}
             >
@@ -93,13 +91,13 @@ export default function Navigation() {
         aria-controls="mobile-menu"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-fn-neige" />
+          <X className="w-6 h-6 text-white" />
         ) : (
-          <Menu className="w-6 h-6 text-fn-neige" />
+          <Menu className="w-6 h-6 text-white" />
         )}
       </button>
 
-      {/* Menu Mobile Animé */}
+      {/* Menu Mobile */}
       {isOpen && (
         <motion.div
           id="mobile-menu"
@@ -107,7 +105,7 @@ export default function Navigation() {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="fixed top-[72px] left-0 right-0 bg-fn-vert-profond/95 backdrop-blur-xl shadow-glass-lg md:hidden z-50"
+          className="fixed top-[72px] left-0 right-0 bg-fn-vert-profond/98 shadow-matte-lg md:hidden z-50"
         >
           <ul className="flex flex-col p-4 gap-2">
             {navLinks.map((link, index) => (
@@ -121,10 +119,10 @@ export default function Navigation() {
                 <Link
                   href={link.href}
                   onClick={handleLinkClick}
-                  className={`font-accent text-sm block px-4 py-2 rounded-md transition-colors duration-200 ${
+                  className={`font-accent text-sm block px-4 py-2 rounded-xl transition-colors duration-200 ${
                     isActive(link.href)
-                      ? 'bg-fn-vert-vif text-fn-neige'
-                      : 'text-fn-neige hover:bg-fn-vert-vif/50'
+                      ? 'bg-fn-vert-moyen text-white'
+                      : 'text-white/80 hover:bg-fn-vert-moyen/50'
                   }`}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                 >

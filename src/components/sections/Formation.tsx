@@ -6,8 +6,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Formation — Section sombre glassmorphique
- * Cartes translucides flottantes sur surface verre vert profond
+ * Formation — Surface vert forêt mate
+ * Cartes translucides satinées, props physiques
+ * Style éditorial organique
  */
 
 interface TrainingCard {
@@ -20,7 +21,7 @@ interface TrainingCard {
 const trainingCards: TrainingCard[] = [
   {
     id: 'agronomy',
-    title: 'Agronomie & Horticulture',
+    title: 'Agronomie & horticulture',
     emoji: '🌾',
     description:
       'Maîtriser les sciences fondamentales de la culture et de la gestion des plantes.',
@@ -54,7 +55,7 @@ function TrainingCardComponent({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+      initial={{ opacity: 0, y: 24, scale: 0.97 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{
         duration: 0.7,
@@ -62,7 +63,7 @@ function TrainingCardComponent({
         delay: index * 0.12,
       }}
     >
-      <div className="h-full bg-white/[0.07] backdrop-blur-md rounded-4xl border border-white/10 p-8 md:p-10 hover:bg-white/[0.12] hover:border-white/20 hover:translate-y-[-6px] transition-all duration-500 flex flex-col">
+      <div className="h-full bg-white/[0.08] rounded-5xl border border-white/[0.06] p-8 md:p-10 hover:bg-white/[0.12] transition-all duration-500 flex flex-col">
         {/* Icône */}
         <div className="text-5xl mb-5" aria-hidden="true">
           {card.emoji}
@@ -74,7 +75,7 @@ function TrainingCardComponent({
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-base text-white/75 leading-relaxed flex-grow">
+        <p className="font-corps text-base text-white/70 leading-relaxed flex-grow">
           {card.description}
         </p>
       </div>
@@ -94,25 +95,21 @@ export default function Formation() {
       className="relative w-full py-20 md:py-28 lg:py-36 overflow-hidden"
       aria-label="Section de formation de la relève"
     >
-      {/* Fond vert profond */}
-      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-[#1E4A35] to-fn-vert-profond" />
+      {/* Fond vert profond mate */}
+      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-fn-vert-foret to-fn-vert-profond" />
 
-      {/* Décorations flottantes */}
+      {/* Props décoratifs */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <motion.div
-          className="absolute top-[8%] right-[6%] w-48 h-48 rounded-full bg-fn-vert-clair/6 blur-3xl"
-          animate={{ scale: [1, 1.15, 1] }}
+          className="absolute top-[10%] right-[7%] w-14 h-9 bg-fn-orange/15 prop-capsule"
+          style={{ borderRadius: '50%' }}
+          animate={{ y: [0, -6, 0], rotate: [5, 8, 5] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-[12%] left-[4%] w-40 h-40 rounded-full bg-fn-bleu-glace/5 blur-3xl"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-        <motion.div
-          className="absolute top-[40%] right-[20%] w-8 h-8 rounded-full bg-fn-soleil/15 border border-fn-soleil/20"
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-[15%] left-[5%] w-10 h-10 bg-fn-cream/6 prop-oval"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
       </div>
 
@@ -128,7 +125,7 @@ export default function Formation() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-white text-center leading-tight">
             Former la relève.
             <br />
-            <span className="text-fn-soleil">Créer l'avenir.</span>
+            <span className="text-fn-orange">Créer l'avenir.</span>
           </h2>
         </motion.div>
 
@@ -140,21 +137,21 @@ export default function Formation() {
           animate={isContentInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
         >
-          <p className="font-corps text-lg text-white/85 leading-relaxed text-center max-w-3xl mx-auto">
+          <p className="font-corps text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
             Fruits Nordiques offre un programme de formation en agronomie, horticulture,
             gestion de serre et entrepreneuriat agricole. Des connaissances pratiques qui
             préparent la relève à réussir dans le secteur agroalimentaire québécois.
           </p>
 
-          {/* Panneau translucide partenariats */}
-          <div className="bg-white/[0.06] backdrop-blur-md rounded-3xl border border-white/10 p-7 md:p-8">
-            <p className="font-corps text-base md:text-lg text-white/85 mb-4">
-              <span className="font-accent font-semibold text-fn-soleil">Partenariats :</span> Nous collaborons avec
+          {/* Panneau partenariats */}
+          <div className="bg-white/[0.06] rounded-5xl border border-white/[0.06] p-7 md:p-8">
+            <p className="font-corps text-base md:text-lg text-white/80 mb-4">
+              <span className="font-accent font-semibold text-fn-orange">Partenariats :</span> Nous collaborons avec
               des établissements d'enseignement locaux (DEP, AEC, universitaire) pour assurer
               une formation alignée avec les besoins du marché.
             </p>
-            <p className="font-corps text-base md:text-lg text-white/85">
-              <span className="font-accent font-semibold text-fn-soleil">Priorité :</span> Jeunes, personnes sans
+            <p className="font-corps text-base md:text-lg text-white/80">
+              <span className="font-accent font-semibold text-fn-orange">Priorité :</span> Jeunes, personnes sans
               emploi et en réorientation professionnelle trouvent ici une porte d'entrée vers
               une carrière significative.
             </p>

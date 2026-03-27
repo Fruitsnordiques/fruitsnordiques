@@ -1,26 +1,20 @@
 import React from 'react';
 
 interface BadgeProps {
-  /** Contenu du badge */
   children: React.ReactNode;
-  /** Variante de couleur */
-  variant?: 'vert' | 'soleil' | 'terre' | 'bleu';
-  /** Classes CSS supplémentaires */
+  variant?: 'vert' | 'orange' | 'cream';
   className?: string;
 }
 
 /**
- * Petit badge/tag avec forme de pilule.
- * Supporte plusieurs variantes de couleur.
+ * Badge pilule — mate, discret, éditorial.
  */
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ children, variant = 'vert', className = '' }, ref) => {
-    // Classes de variante de couleur
     const variantClasses = {
-      vert: 'bg-fn-vert-clair text-fn-neige',
-      soleil: 'bg-fn-soleil text-fn-gris-fonce',
-      terre: 'bg-fn-terre text-fn-neige',
-      bleu: 'bg-fn-bleu-glace text-fn-gris-fonce',
+      vert: 'bg-fn-vert-profond text-white',
+      orange: 'bg-fn-orange text-white',
+      cream: 'bg-fn-cream-dark text-fn-vert-profond',
     };
 
     return (
@@ -28,7 +22,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         ref={ref}
         className={`
           inline-flex items-center px-3 py-1 rounded-full
-          font-accent font-semibold text-xs uppercase tracking-wide
+          font-accent font-semibold text-xs tracking-wide
           ${variantClasses[variant]}
           ${className}
         `}
