@@ -6,14 +6,15 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Problématique — Composition éditoriale libre
- * Cartes mates avec légère inclinaison, palette stricte
- * Accent orange pour l'urgence au lieu de rouge
+ * Problématique — Dashboard data : chiffres d'urgence
+ * Cartes sombres avec indicateurs colorés et bordures accent
  */
 
 interface ProblemCard {
   id: string;
-  emoji: string;
+  icon: string;
+  stat: string;
+  statColor: string;
   title: string;
   description: string;
   gridClass: string;
@@ -22,7 +23,9 @@ interface ProblemCard {
 const problems: ProblemCard[] = [
   {
     id: 'deserts-alimentaires',
-    emoji: '🏜️',
+    icon: '🏜️',
+    stat: '2.4M',
+    statColor: 'text-fn-rouge',
     title: 'Déserts alimentaires',
     description:
       'Des millions de ménages en zones rurales et périurbaines ont un accès limité à des aliments frais, locaux et abordables.',
@@ -30,7 +33,9 @@ const problems: ProblemCard[] = [
   },
   {
     id: 'dependance-importations',
-    emoji: '🌍',
+    icon: '🌍',
+    stat: '65%',
+    statColor: 'text-fn-orange',
     title: 'Dépendance aux importations',
     description:
       "Une part significative des fruits et légumes consommés au Québec provient de l'extérieur du pays.",
@@ -38,7 +43,9 @@ const problems: ProblemCard[] = [
   },
   {
     id: 'insecurite-alimentaire',
-    emoji: '⚠️',
+    icon: '⚠️',
+    stat: '↗',
+    statColor: 'text-fn-jaune',
     title: 'Insécurité alimentaire',
     description:
       'Les crises révèlent la fragilité du système alimentaire industriel.',
@@ -46,7 +53,9 @@ const problems: ProblemCard[] = [
   },
   {
     id: 'declin-releve',
-    emoji: '👨‍🌾',
+    icon: '👨‍🌾',
+    stat: '-28%',
+    statColor: 'text-fn-rouge',
     title: 'Déclin de la relève',
     description:
       'Le secteur agricole peine à attirer et former la prochaine génération.',
@@ -54,7 +63,9 @@ const problems: ProblemCard[] = [
   },
   {
     id: 'chomage-jeunes',
-    emoji: '📊',
+    icon: '📊',
+    stat: '11.2%',
+    statColor: 'text-fn-orange',
     title: 'Chômage chez les jeunes',
     description:
       "Des milliers de jeunes dans les régions manquent d'opportunités concrètes.",
@@ -70,41 +81,62 @@ function ProblemCardComponent({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
     <motion.div
       ref={ref}
       className={`${card.gridClass}`}
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.7,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
         delay: index * 0.08,
       }}
     >
-      <div className={`h-full card-matte p-8 md:p-10 flex flex-col group cursor-default border-l-4 border-fn-orange/40 hover:border-fn-orange transition-all duration-500 ${
-        index === 0 ? 'md:p-12' : ''
+      <div className={`h-full card-dark p-6 md:p-8 flex flex-col group ${
+        index === 0 ? 'md:p-10' : ''
       }`}>
-        {/* Icône emoji */}
-        <div className={`mb-5 ${index === 0 ? 'text-6xl' : 'text-4xl'}`} aria-hidden="true">
-          {card.emoji}
+        {/* Entête : icône + stat */}
+        <div className="flex items-center justify-between mb-4">
+          <span className={`${index === 0 ? 'text-4xl' : 'text-2xl'}`} aria-hidden="true">
+            {card.icon}
+          </span>
+          <span className={`font-accent font-bold ${card.statColor} ${
+            index === 0 ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl'
+          }`}>
+            {card.stat}
+          </span>
         </div>
 
         {/* Titre */}
-        <h3 className={`font-accent font-bold text-fn-vert-profond mb-3 ${
-          index === 0 ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'
+        <h3 className={`font-accent font-bold text-fn-blanc mb-2 ${
+          index === 0 ? 'text-xl md:text-2xl' : 'text-base md:text-lg'
         }`}>
           {card.title}
         </h3>
 
         {/* Description */}
-        <p className={`font-corps text-fn-gris-chaud leading-relaxed flex-grow ${
-          index === 0 ? 'text-base md:text-lg' : 'text-base'
+        <p className={`font-corps text-fn-gris leading-relaxed flex-grow ${
+          index === 0 ? 'text-base' : 'text-sm'
         }`}>
           {card.description}
         </p>
+
+        {/* Barre indicatrice en bas */}
+        <div className="mt-4 h-1 rounded-full bg-fn-gris-bordure overflow-hidden">
+          <motion.div
+            className={`h-full rounded-full ${
+              card.statColor === 'text-fn-rouge' ? 'bg-fn-rouge' :
+              card.statColor === 'text-fn-orange' ? 'bg-fn-orange' :
+              'bg-fn-jaune'
+            }`}
+            initial={{ width: '0%' }}
+            animate={isInView ? { width: index === 0 ? '85%' : `${60 + index * 8}%` } : {}}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.4 + index * 0.1 }}
+          />
+        </div>
       </div>
     </motion.div>
   );
@@ -112,28 +144,28 @@ function ProblemCardComponent({
 
 export default function Problematique() {
   const titleRef = useRef(null);
-  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-60px' });
 
   return (
     <section
       id="problematique"
-      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir px-5 sm:px-8"
       aria-label="Section sur le défi alimentaire du Québec"
     >
-      {/* Props décoratifs */}
-      <div className="absolute top-16 right-12 w-16 h-10 bg-fn-orange/10 prop-capsule" style={{ borderRadius: '50%' }} aria-hidden="true" />
-      <div className="absolute bottom-20 left-10 w-12 h-12 bg-fn-vert-profond/5 prop-oval" aria-hidden="true" />
-
       <div className="max-w-7xl mx-auto">
         {/* Titre */}
         <motion.div
           ref={titleRef}
-          className="mb-14 md:mb-20"
-          initial={{ opacity: 0, y: 24 }}
+          className="mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond text-center leading-tight">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-1 rounded-full bg-fn-rouge" />
+            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Problématique</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc leading-tight">
             Le défi alimentaire
             <br />
             <span className="text-fn-orange">du Québec</span>
@@ -141,7 +173,7 @@ export default function Problematique() {
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 auto-rows-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 auto-rows-auto">
           {problems.map((problem, index) => (
             <ProblemCardComponent
               key={problem.id}

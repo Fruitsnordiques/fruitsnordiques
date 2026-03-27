@@ -16,8 +16,8 @@ const navLinks = [
 ];
 
 /**
- * Navigation — style éditorial mate
- * Typographie lowercase, accents orange
+ * Navigation — style dashboard dark
+ * Accents orange sur actif, transitions rapides, menu mobile sombre
  */
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,22 +39,22 @@ export default function Navigation() {
   const menuVariants = {
     hidden: {
       opacity: 0,
-      y: -20,
+      y: -12,
       transition: { duration: 0.2 },
     },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3 },
+      transition: { duration: 0.25 },
     },
   };
 
   const linkVariants = {
-    hidden: { opacity: 0, x: -10 },
+    hidden: { opacity: 0, x: -8 },
     visible: (i: number) => ({
       opacity: 1,
       x: 0,
-      transition: { delay: i * 0.05 },
+      transition: { delay: i * 0.04 },
     }),
   };
 
@@ -64,15 +64,15 @@ export default function Navigation() {
       aria-label="Navigation principale"
     >
       {/* Navigation Desktop */}
-      <ul className="hidden md:flex gap-8">
+      <ul className="hidden md:flex gap-1">
         {navLinks.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className={`font-accent text-sm transition-colors duration-200 pb-1 border-b-2 ${
+              className={`font-accent text-sm px-3 py-1.5 rounded-lg transition-all duration-200 ${
                 isActive(link.href)
-                  ? 'text-fn-orange border-fn-orange'
-                  : 'text-white/80 border-b-transparent hover:text-fn-orange hover:border-fn-orange'
+                  ? 'text-fn-orange bg-fn-orange/10'
+                  : 'text-fn-gris-clair hover:text-fn-blanc hover:bg-fn-blanc/5'
               }`}
               aria-current={isActive(link.href) ? 'page' : undefined}
             >
@@ -84,16 +84,16 @@ export default function Navigation() {
 
       {/* Bouton Menu Mobile */}
       <button
-        className="md:hidden p-2 -mr-2"
+        className="md:hidden p-2 -mr-2 text-fn-gris-clair hover:text-fn-blanc transition-colors"
         onClick={toggleMenu}
         aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-white" />
+          <X className="w-5 h-5" />
         ) : (
-          <Menu className="w-6 h-6 text-white" />
+          <Menu className="w-5 h-5" />
         )}
       </button>
 
@@ -105,9 +105,9 @@ export default function Navigation() {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="fixed top-[72px] left-0 right-0 bg-fn-vert-profond/98 shadow-matte-lg md:hidden z-50"
+          className="fixed top-[64px] left-0 right-0 bg-fn-noir/98 border-b border-fn-gris-bordure/50 shadow-dark-lg md:hidden z-50"
         >
-          <ul className="flex flex-col p-4 gap-2">
+          <ul className="flex flex-col p-3 gap-1">
             {navLinks.map((link, index) => (
               <motion.li
                 key={link.href}
@@ -119,10 +119,10 @@ export default function Navigation() {
                 <Link
                   href={link.href}
                   onClick={handleLinkClick}
-                  className={`font-accent text-sm block px-4 py-2 rounded-xl transition-colors duration-200 ${
+                  className={`font-accent text-sm block px-4 py-2.5 rounded-xl transition-all duration-200 ${
                     isActive(link.href)
-                      ? 'bg-fn-vert-moyen text-white'
-                      : 'text-white/80 hover:bg-fn-vert-moyen/50'
+                      ? 'bg-fn-orange/10 text-fn-orange'
+                      : 'text-fn-gris-clair hover:bg-fn-noir-eleve hover:text-fn-blanc'
                   }`}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                 >

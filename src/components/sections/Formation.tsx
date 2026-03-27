@@ -6,39 +6,42 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Formation — Surface vert forêt mate
- * Cartes translucides satinées, props physiques
- * Style éditorial organique
+ * Formation — Cartes élevées avec barres d'accent colorées
+ * Panneau partenariats en carte dark avec bordure orange
  */
 
 interface TrainingCard {
   id: string;
   title: string;
-  emoji: string;
+  icon: string;
   description: string;
+  accent: string;
 }
 
 const trainingCards: TrainingCard[] = [
   {
     id: 'agronomy',
     title: 'Agronomie & horticulture',
-    emoji: '🌾',
+    icon: '🌾',
     description:
       'Maîtriser les sciences fondamentales de la culture et de la gestion des plantes.',
+    accent: 'bg-fn-vert-vif',
   },
   {
     id: 'greenhouse',
     title: 'Gestion de serre',
-    emoji: '🏠',
+    icon: '🏠',
     description:
       'Exploiter les technologies modernes pour optimiser la production en environnement contrôlé.',
+    accent: 'bg-fn-orange',
   },
   {
     id: 'entrepreneurship',
     title: 'Entrepreneuriat agricole',
-    emoji: '💼',
+    icon: '💼',
     description:
       "Développer votre vision d'entreprise et créer un projet agricole viable et durable.",
+    accent: 'bg-fn-bleu',
   },
 ];
 
@@ -50,32 +53,35 @@ function TrainingCardComponent({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24, scale: 0.97 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.7,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        delay: index * 0.12,
+        delay: index * 0.1,
       }}
     >
-      <div className="h-full bg-white/[0.08] rounded-5xl border border-white/[0.06] p-8 md:p-10 hover:bg-white/[0.12] transition-all duration-500 flex flex-col">
+      <div className="h-full card-elevated p-6 md:p-8 flex flex-col">
+        {/* Barre accent */}
+        <div className={`w-8 h-1 rounded-full ${card.accent} mb-5`} />
+
         {/* Icône */}
-        <div className="text-5xl mb-5" aria-hidden="true">
-          {card.emoji}
+        <div className="text-3xl mb-4" aria-hidden="true">
+          {card.icon}
         </div>
 
         {/* Titre */}
-        <h3 className="font-accent font-bold text-xl md:text-2xl text-white mb-4">
+        <h3 className="font-accent font-bold text-base md:text-lg text-fn-blanc mb-3">
           {card.title}
         </h3>
 
         {/* Description */}
-        <p className="font-corps text-base text-white/70 leading-relaxed flex-grow">
+        <p className="font-corps text-sm text-fn-gris leading-relaxed flex-grow">
           {card.description}
         </p>
       </div>
@@ -86,43 +92,29 @@ function TrainingCardComponent({
 export default function Formation() {
   const titleRef = useRef(null);
   const contentRef = useRef(null);
-  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
-  const isContentInView = useInView(contentRef, { once: true, margin: '-80px' });
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-60px' });
+  const isContentInView = useInView(contentRef, { once: true, margin: '-60px' });
 
   return (
     <section
       id="formation"
-      className="relative w-full py-20 md:py-28 lg:py-36 overflow-hidden"
+      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir-profond px-5 sm:px-8"
       aria-label="Section de formation de la relève"
     >
-      {/* Fond vert profond mate */}
-      <div className="absolute inset-0 bg-gradient-to-br from-fn-vert-profond via-fn-vert-foret to-fn-vert-profond" />
-
-      {/* Props décoratifs */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <motion.div
-          className="absolute top-[10%] right-[7%] w-14 h-9 bg-fn-orange/15 prop-capsule"
-          style={{ borderRadius: '50%' }}
-          animate={{ y: [0, -6, 0], rotate: [5, 8, 5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-[15%] left-[5%] w-10 h-10 bg-fn-cream/6 prop-oval"
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div className="max-w-6xl mx-auto">
         {/* Titre */}
         <motion.div
           ref={titleRef}
-          className="mb-8 md:mb-12"
-          initial={{ opacity: 0, y: 24 }}
+          className="mb-6"
+          initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-white text-center leading-tight">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-1 rounded-full bg-fn-bleu" />
+            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Formation</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc leading-tight">
             Former la relève.
             <br />
             <span className="text-fn-orange">Créer l'avenir.</span>
@@ -132,25 +124,25 @@ export default function Formation() {
         {/* Contenu descriptif */}
         <motion.div
           ref={contentRef}
-          className="mb-14 md:mb-18 space-y-6"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-10 md:mb-14 space-y-5"
+          initial={{ opacity: 0, y: 16 }}
           animate={isContentInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
-          <p className="font-corps text-lg text-white/80 leading-relaxed text-center max-w-3xl mx-auto">
+          <p className="font-corps text-base text-fn-gris-clair leading-relaxed max-w-3xl">
             Fruits Nordiques offre un programme de formation en agronomie, horticulture,
             gestion de serre et entrepreneuriat agricole. Des connaissances pratiques qui
             préparent la relève à réussir dans le secteur agroalimentaire québécois.
           </p>
 
           {/* Panneau partenariats */}
-          <div className="bg-white/[0.06] rounded-5xl border border-white/[0.06] p-7 md:p-8">
-            <p className="font-corps text-base md:text-lg text-white/80 mb-4">
+          <div className="card-dark p-6 md:p-7 border-l-2 border-fn-orange/40">
+            <p className="font-corps text-sm text-fn-gris-clair mb-3">
               <span className="font-accent font-semibold text-fn-orange">Partenariats :</span> Nous collaborons avec
               des établissements d'enseignement locaux (DEP, AEC, universitaire) pour assurer
               une formation alignée avec les besoins du marché.
             </p>
-            <p className="font-corps text-base md:text-lg text-white/80">
+            <p className="font-corps text-sm text-fn-gris-clair">
               <span className="font-accent font-semibold text-fn-orange">Priorité :</span> Jeunes, personnes sans
               emploi et en réorientation professionnelle trouvent ici une porte d'entrée vers
               une carrière significative.
@@ -159,7 +151,7 @@ export default function Formation() {
         </motion.div>
 
         {/* Cartes de formation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           {trainingCards.map((card, index) => (
             <TrainingCardComponent
               key={card.id}

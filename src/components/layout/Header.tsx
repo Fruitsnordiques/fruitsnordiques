@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Navigation from './Navigation';
 
 /**
- * En-tête éditorial — mate, flottant sur fond crème ou vert
- * Transition douce au scroll, pas de glassmorphisme
+ * En-tête dashboard — barre sombre, transition au scroll
+ * Fond charcoal avec bordure subtile quand scrollé
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,24 +26,26 @@ export default function Header() {
       {/* Lien d'accessibilité */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-vert-moyen focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-fn-orange focus:text-white"
       >
         Sauter au contenu principal
       </a>
 
-      {/* En-tête flottant mate */}
+      {/* En-tête fixe dark */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-400 ${
           isScrolled
-            ? 'bg-fn-vert-profond/95 shadow-matte-lg'
+            ? 'bg-fn-noir/95 border-b border-fn-gris-bordure/50 shadow-dark-md backdrop-blur-sm'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <span className="font-titre text-2xl sm:text-3xl text-white tracking-tight">
+            <div className="flex-shrink-0 flex items-center gap-3">
+              {/* Indicateur de statut */}
+              <span className="w-2 h-2 rounded-full bg-fn-vert-vif animate-pulse-soft" />
+              <span className="font-accent text-xl sm:text-2xl font-bold text-fn-blanc tracking-tight">
                 Fruits Nordiques
               </span>
             </div>

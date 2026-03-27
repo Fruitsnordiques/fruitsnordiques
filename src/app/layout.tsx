@@ -72,7 +72,7 @@ export default function RootLayout({
       lang="fr-CA"
       className={`${inter.variable} ${playfair.variable} ${montserrat.variable}`}
     >
-      <body className="bg-fn-cream text-fn-noir font-corps">
+      <body className="bg-fn-noir-profond text-fn-blanc font-corps">
         <Header />
         <main id="main-content">{children}</main>
         <Footer />

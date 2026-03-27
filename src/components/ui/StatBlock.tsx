@@ -5,35 +5,54 @@ interface StatBlockProps {
   label: string;
   description?: string;
   icon?: React.ReactNode;
+  accentColor?: 'orange' | 'vert' | 'bleu' | 'jaune';
   className?: string;
 }
 
 /**
- * Bloc statistique — typographie éditoriale, mate.
+ * Bloc statistique — style dashboard data, chiffres dominants.
+ * Typographie : chiffre massif, label discret, barre indicatrice colorée.
  */
 const StatBlock = React.forwardRef<HTMLDivElement, StatBlockProps>(
-  ({ value, label, description, icon, className = '' }, ref) => {
+  ({ value, label, description, icon, accentColor = 'orange', className = '' }, ref) => {
+    const accentClasses = {
+      orange: 'bg-fn-orange',
+      vert:   'bg-fn-vert-vif',
+      bleu:   'bg-fn-bleu',
+      jaune:  'bg-fn-jaune',
+    };
+
+    const textAccent = {
+      orange: 'text-fn-orange',
+      vert:   'text-fn-vert-vif',
+      bleu:   'text-fn-bleu',
+      jaune:  'text-fn-jaune',
+    };
+
     return (
       <div
         ref={ref}
-        className={`flex flex-col items-center justify-center text-center ${className}`}
+        className={`card-stat flex flex-col ${className}`}
       >
+        {/* Barre indicatrice colorée */}
+        <div className={`w-10 h-1 rounded-full ${accentClasses[accentColor]} mb-5`} />
+
         {icon && (
-          <div className="mb-3 text-fn-orange text-3xl flex items-center justify-center">
+          <div className={`mb-3 ${textAccent[accentColor]} text-2xl flex items-center`}>
             {icon}
           </div>
         )}
 
-        <div className="font-titre text-5xl md:text-6xl font-bold text-fn-vert-profond mb-2">
+        <div className={`font-accent text-4xl md:text-5xl font-bold ${textAccent[accentColor]} mb-2 tracking-tight`}>
           {value}
         </div>
 
-        <div className="font-accent text-xs md:text-sm font-bold tracking-wider text-fn-gris-chaud mb-1">
+        <div className="font-accent text-xs font-semibold tracking-wider text-fn-gris-clair uppercase mb-1">
           {label}
         </div>
 
         {description && (
-          <p className="font-corps text-sm md:text-base text-fn-gris-chaud mt-2 max-w-sm leading-relaxed">
+          <p className="font-corps text-sm text-fn-gris mt-2 leading-relaxed">
             {description}
           </p>
         )}

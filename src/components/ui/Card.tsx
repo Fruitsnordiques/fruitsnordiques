@@ -3,43 +3,29 @@ import React from 'react';
 interface CardProps {
   /** Contenu de la carte */
   children: React.ReactNode;
-  /** Variante de surface */
-  variant?: 'matte' | 'matte-dark' | 'satin' | 'accent';
-  /** Légère inclinaison éditoriale */
-  tilt?: 'none' | 'left' | 'right' | 'soft';
+  /** Variante de surface dark dashboard */
+  variant?: 'dark' | 'elevated' | 'accent' | 'stat';
   /** Classes CSS supplémentaires */
   className?: string;
 }
 
 /**
- * Carte matière — surfaces mates et satinées, coins superellipse.
- * Style éditorial organique : pas de glassmorphisme, pas de transparence.
- * Quatre variantes : matte (blanc), matte-dark (vert forêt), satin (crème chaud), accent (orange).
+ * Carte dashboard — surfaces sombres, bordures subtiles, accents data.
+ * Quatre variantes : dark (standard), elevated (surélevée), accent (orange), stat (données).
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, variant = 'matte', tilt = 'none', className = '' }, ref) => {
+  ({ children, variant = 'dark', className = '' }, ref) => {
     const variants = {
-      matte: 'card-matte',
-      'matte-dark': 'card-matte-dark',
-      satin: 'card-satin',
+      dark: 'card-dark',
+      elevated: 'card-elevated',
       accent: 'card-accent',
-    };
-
-    const tilts = {
-      none: '',
-      left: 'editorial-offset-left',
-      right: 'editorial-offset-right',
-      soft: 'editorial-tilt-soft',
+      stat: 'card-stat',
     };
 
     return (
       <div
         ref={ref}
-        className={`
-          ${variants[variant]}
-          ${tilts[tilt]}
-          ${className}
-        `}
+        className={`${variants[variant]} ${className}`}
       >
         {children}
       </div>

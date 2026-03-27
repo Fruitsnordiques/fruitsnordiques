@@ -3,38 +3,44 @@
 @tailwind utilities;
 
 /* ===========================
-   Design System — Fruits Nordiques
-   Style : Éditorial Organique Matière
+   Design System — Fruits Nordiques v3
+   Style : Dark Dashboard Professionnel
    =========================== */
 
 :root {
-  /* Palette stricte */
-  --fn-vert-profond:   #1A3A2A;
-  --fn-vert-foret:     #1E4A35;
-  --fn-vert-moyen:     #2D7A4F;
-  --fn-orange:         #E8862A;
-  --fn-orange-doux:    #F0A050;
-  --fn-cream:          #FAF8F4;
-  --fn-cream-dark:     #F0EDE6;
-  --fn-blanc:          #FFFFFF;
-  --fn-noir:           #1A1A1A;
-  --fn-gris-chaud:     #6B6560;
-  --fn-gris-clair:     #B5B0A8;
+  /* Palette dark dashboard */
+  --fn-noir-profond:  #0C0E14;
+  --fn-noir:          #13151D;
+  --fn-noir-carte:    #1A1D28;
+  --fn-noir-eleve:    #222535;
+  --fn-gris-bordure:  #2E3245;
+  --fn-gris-fonce:    #3D4155;
+  --fn-gris:          #6B7280;
+  --fn-gris-clair:    #9CA3AF;
+  --fn-blanc:         #F1F3F7;
+  --fn-blanc-pur:     #FFFFFF;
+  --fn-orange:        #E8862A;
+  --fn-orange-doux:   #F0A050;
+  --fn-vert-moyen:    #2D7A4F;
+  --fn-vert-vif:      #34D399;
+  --fn-rouge:         #EF4444;
+  --fn-jaune:         #F59E0B;
+  --fn-bleu:          #3B82F6;
 }
 
-/* Typographie de base */
+/* Typographie de base — dark mode */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--fn-noir);
-  background-color: var(--fn-cream);
-  line-height: 1.7;
+  color: var(--fn-blanc);
+  background-color: var(--fn-noir-profond);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', Georgia, serif;
-  color: var(--fn-vert-profond);
+  color: var(--fn-blanc);
   line-height: 1.12;
 }
 
@@ -47,159 +53,118 @@ h1, h2, h3, h4 {
 
   /* Sections */
   .section-fn {
-    @apply py-20 md:py-28 lg:py-36;
+    @apply py-20 md:py-28 lg:py-32;
   }
 
-  /* === SURFACES MATIÈRE === */
+  /* === SURFACES DASHBOARD DARK === */
 
-  /* Carte mate claire — surface crème satinée */
-  .card-matte {
-    @apply bg-white rounded-5xl shadow-matte-md;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Carte principale — surface dark avec bordure subtile */
+  .card-dark {
+    @apply rounded-3xl border border-fn-gris-bordure/60;
+    background: linear-gradient(145deg, #1A1D28 0%, #1E2130 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(46, 50, 69, 0.3);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .card-matte:hover {
-    @apply shadow-matte-lg;
-    transform: translateY(-4px);
-  }
-
-  /* Carte mate foncée — vert forêt profond */
-  .card-matte-dark {
-    @apply rounded-5xl;
-    background: linear-gradient(
-      145deg,
-      #1A3A2A 0%,
-      #1E4A35 50%,
-      #1A3A2A 100%
-    );
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.25),
-      0 8px 24px rgba(0, 0, 0, 0.12);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-matte-dark:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 28px 72px rgba(0, 0, 0, 0.3),
-      0 12px 32px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Carte satinée — surface légèrement dorée/chaude */
-  .card-satin {
-    @apply rounded-5xl;
-    background: linear-gradient(
-      145deg,
-      #FAF8F4 0%,
-      #F5F0E8 100%
-    );
-    box-shadow:
-      0 8px 32px rgba(26, 58, 42, 0.07),
-      0 2px 8px rgba(26, 58, 42, 0.03);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-satin:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 16px 48px rgba(26, 58, 42, 0.1),
-      0 4px 16px rgba(26, 58, 42, 0.06);
-  }
-
-  /* Carte orange accent */
-  .card-accent {
-    @apply rounded-5xl;
-    background: linear-gradient(
-      145deg,
-      #F0A050 0%,
-      #E8862A 100%
-    );
-    box-shadow:
-      0 12px 36px rgba(232, 134, 42, 0.2),
-      0 4px 12px rgba(232, 134, 42, 0.1);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-accent:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 20px 48px rgba(232, 134, 42, 0.25),
-      0 8px 20px rgba(232, 134, 42, 0.12);
-  }
-
-  /* === BOUTON CAPSULE === */
-  .btn-capsule {
-    @apply rounded-full font-accent font-semibold;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .btn-capsule:hover {
+  .card-dark:hover {
+    border-color: rgba(232, 134, 42, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(232, 134, 42, 0.15);
     transform: translateY(-2px);
   }
 
-  .btn-capsule:active {
+  /* Carte élevée — surface légèrement plus claire */
+  .card-elevated {
+    @apply rounded-3xl border border-fn-gris-bordure/50;
+    background: linear-gradient(145deg, #222535 0%, #262A3C 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-elevated:hover {
+    border-color: rgba(52, 211, 153, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(52, 211, 153, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Carte accent orange — pour éléments mis en avant */
+  .card-accent {
+    @apply rounded-3xl;
+    background: linear-gradient(145deg, #E8862A 0%, #D4761E 100%);
+    box-shadow: 0 4px 16px rgba(232, 134, 42, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232, 134, 42, 0.3), 0 4px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Carte statistique — pour chiffres et métriques */
+  .card-stat {
+    @apply rounded-2xl border border-fn-gris-bordure/40 p-6;
+    background: rgba(26, 29, 40, 0.8);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-stat:hover {
+    border-color: rgba(232, 134, 42, 0.25);
+  }
+
+  /* === INDICATEURS DATA VIZ === */
+  .indicator-bar {
+    @apply h-1.5 rounded-full;
+    background: linear-gradient(90deg, var(--fn-orange), var(--fn-vert-vif));
+  }
+
+  .indicator-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  /* === BOUTONS === */
+  .btn-dashboard {
+    @apply rounded-xl font-accent font-semibold;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-dashboard:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-dashboard:active {
     transform: translateY(0);
-  }
-
-  /* === PROPS DÉCORATIFS — formes organiques physiques === */
-  .prop-capsule {
-    @apply rounded-full;
-    box-shadow:
-      0 8px 24px rgba(26, 58, 42, 0.12),
-      0 2px 8px rgba(26, 58, 42, 0.06);
-  }
-
-  .prop-oval {
-    border-radius: 50%;
-    box-shadow:
-      0 8px 24px rgba(26, 58, 42, 0.12),
-      0 2px 8px rgba(26, 58, 42, 0.06);
-  }
-
-  /* === COMPOSITION LIBRE === */
-  .editorial-offset-left {
-    transform: rotate(-2deg);
-  }
-
-  .editorial-offset-right {
-    transform: rotate(1.5deg);
-  }
-
-  .editorial-tilt-soft {
-    transform: rotate(-1deg);
   }
 
   /* Focus visible pour accessibilité */
   .focus-fn {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-vert-moyen focus-visible:ring-offset-2;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir;
   }
 }
 
 /* Sélection de texte */
 ::selection {
-  background-color: rgba(232, 134, 42, 0.2);
-  color: var(--fn-vert-profond);
+  background-color: rgba(232, 134, 42, 0.25);
+  color: var(--fn-blanc);
 }
 
-/* Scrollbar personnalisée */
+/* Scrollbar — fine et sombre */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--fn-cream);
+  background: var(--fn-noir-profond);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--fn-gris-clair);
+  background: var(--fn-gris-fonce);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--fn-gris-chaud);
+  background: var(--fn-gris);
 }
 
-/* Transition globale douce */
+/* Scroll fluide */
 * {
   scroll-behavior: smooth;
 }

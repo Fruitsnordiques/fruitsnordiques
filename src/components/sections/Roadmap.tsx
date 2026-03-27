@@ -6,9 +6,9 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 /**
- * Roadmap — Timeline matière avec cartes éditoriales
- * Phase actuelle en accent orange, reste en matte blanc
- * Style organique : pas de rigidité, surfaces mates
+ * Roadmap — Timeline dashboard avec nœuds et cartes status
+ * Phase actuelle en card-accent orange, reste en card-dark
+ * Indicateurs de progression visuels
  */
 
 const phases = [
@@ -19,6 +19,7 @@ const phases = [
     period: '2025–2026',
     description: 'Étude de faisabilité, sélection du site, permis, design architectural, montage financier, partenariats fondateurs',
     isCurrent: true,
+    progress: 25,
   },
   {
     id: 1,
@@ -27,6 +28,7 @@ const phases = [
     period: '2026–2027',
     description: 'Construction de la serre (1 ha), installation des systèmes Kainon, aménagement des espaces communautaires',
     isCurrent: false,
+    progress: 0,
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ const phases = [
     period: '2027',
     description: 'Première saison de production, ouverture des parcelles communautaires, lancement du programme de formation',
     isCurrent: false,
+    progress: 0,
   },
   {
     id: 3,
@@ -43,6 +46,7 @@ const phases = [
     period: '2028–2029',
     description: 'Rentabilité opérationnelle, expansion du programme de formation, développement de la cuisine communautaire',
     isCurrent: false,
+    progress: 0,
   },
   {
     id: 4,
@@ -51,6 +55,7 @@ const phases = [
     period: '2030+',
     description: 'Exportation du modèle, licensing technologique Kainon, impact à l\'échelle provinciale',
     isCurrent: false,
+    progress: 0,
   },
 ];
 
@@ -62,66 +67,83 @@ function PhaseCard({
   index: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
 
   return (
     <motion.div
       ref={ref}
-      className="relative flex items-start gap-6 md:gap-8"
-      initial={{ opacity: 0, x: -24 }}
+      className="relative flex items-start gap-5 md:gap-6"
+      initial={{ opacity: 0, x: -16 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{
-        duration: 0.7,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1],
-        delay: index * 0.1,
+        delay: index * 0.08,
       }}
     >
-      {/* Noeud timeline */}
+      {/* Nœud timeline */}
       <div className="relative flex-shrink-0 z-10">
         <motion.div
-          className={`w-5 h-5 rounded-full border-[3px] ${
+          className={`w-4 h-4 rounded-full border-2 ${
             phase.isCurrent
-              ? 'bg-fn-orange border-fn-orange/40 shadow-[0_0_16px_rgba(232,134,42,0.35)]'
-              : 'bg-fn-vert-moyen border-fn-vert-moyen/30'
+              ? 'bg-fn-orange border-fn-orange shadow-glow-orange'
+              : 'bg-fn-gris-fonce border-fn-gris-bordure'
           }`}
           animate={
             phase.isCurrent
-              ? { scale: [1, 1.15, 1] }
+              ? { scale: [1, 1.2, 1] }
               : {}
           }
           transition={phase.isCurrent ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : {}}
         />
       </div>
 
-      {/* Carte de la phase */}
-      <div className={`flex-grow pb-12 last:pb-0 ${index === phases.length - 1 ? 'pb-0' : ''}`}>
-        <div className={`rounded-5xl p-6 md:p-8 transition-all duration-500 ${
-          phase.isCurrent
-            ? 'card-accent'
-            : 'card-matte'
+      {/* Carte */}
+      <div className={`flex-grow pb-8 ${index === phases.length - 1 ? 'pb-0' : ''}`}>
+        <div className={`rounded-2xl p-5 md:p-7 transition-all duration-400 ${
+          phase.isCurrent ? 'card-accent' : 'card-dark'
         }`}>
-          {/* Badge période */}
-          <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-accent font-semibold mb-4 ${
-            phase.isCurrent
-              ? 'bg-white/20 text-white'
-              : 'bg-fn-vert-moyen/10 text-fn-vert-moyen'
-          }`}>
-            {phase.period}
-          </span>
+          {/* Badge période + progression */}
+          <div className="flex items-center justify-between mb-3">
+            <span className={`inline-block px-3 py-1 rounded-lg text-xs font-accent font-semibold ${
+              phase.isCurrent
+                ? 'bg-white/20 text-white'
+                : 'bg-fn-gris-bordure/50 text-fn-gris-clair'
+            }`}>
+              {phase.period}
+            </span>
+            {phase.isCurrent && (
+              <span className="text-xs font-accent font-semibold text-white/80">
+                {phase.progress}%
+              </span>
+            )}
+          </div>
 
           {/* Titre */}
-          <h3 className={`text-xl md:text-2xl font-accent font-bold mb-3 ${
-            phase.isCurrent ? 'text-white' : 'text-fn-vert-profond'
+          <h3 className={`text-base md:text-lg font-accent font-bold mb-2 ${
+            phase.isCurrent ? 'text-white' : 'text-fn-blanc'
           }`}>
             Phase {phase.number} — {phase.title}
           </h3>
 
           {/* Description */}
-          <p className={`text-base font-corps leading-relaxed ${
-            phase.isCurrent ? 'text-white/85' : 'text-fn-gris-chaud'
+          <p className={`text-sm font-corps leading-relaxed ${
+            phase.isCurrent ? 'text-white/85' : 'text-fn-gris'
           }`}>
             {phase.description}
           </p>
+
+          {/* Barre de progression (phase actuelle uniquement) */}
+          {phase.isCurrent && (
+            <div className="mt-4 h-1 rounded-full bg-white/20 overflow-hidden">
+              <motion.div
+                className="h-full rounded-full bg-white/70"
+                initial={{ width: '0%' }}
+                animate={isInView ? { width: `${phase.progress}%` } : {}}
+                transition={{ duration: 1.5, ease: 'easeOut', delay: 0.5 }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -130,42 +152,43 @@ function PhaseCard({
 
 export default function Roadmap() {
   const titleRef = useRef(null);
-  const isTitleInView = useInView(titleRef, { once: true, margin: '-80px' });
+  const isTitleInView = useInView(titleRef, { once: true, margin: '-60px' });
 
   return (
     <section
       id="roadmap"
-      className="relative w-full py-20 md:py-28 lg:py-36 bg-fn-cream-dark px-5 sm:px-8"
+      className="relative w-full py-20 md:py-28 lg:py-32 bg-fn-noir px-5 sm:px-8"
       aria-label="Feuille de route du projet"
     >
-      {/* Props décoratifs */}
-      <div className="absolute top-24 right-16 w-12 h-12 bg-fn-orange/6 prop-oval" aria-hidden="true" />
-
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}
         <motion.div
           ref={titleRef}
-          className="text-center mb-14 md:mb-20"
-          initial={{ opacity: 0, y: 24 }}
+          className="mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
           animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-vert-profond mb-6 leading-tight">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-1 rounded-full bg-fn-jaune" />
+            <span className="font-accent text-xs font-semibold text-fn-gris tracking-wider uppercase">Roadmap</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-titre font-bold text-fn-blanc mb-5 leading-tight">
             Notre feuille
             <br />
-            <span className="text-fn-vert-moyen">de route</span>
+            <span className="text-fn-orange">de route</span>
           </h2>
 
-          <p className="text-lg md:text-xl font-corps text-fn-gris-chaud max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg font-corps text-fn-gris max-w-2xl leading-relaxed">
             Un plan clair, des jalons concrets, une vision à long terme.
           </p>
         </motion.div>
 
         {/* Timeline verticale */}
-        <div className="relative pl-2 md:pl-4">
+        <div className="relative pl-2">
           {/* Ligne verticale */}
           <div
-            className="absolute left-[9px] md:left-[11px] top-3 bottom-16 w-[2px] bg-gradient-to-b from-fn-orange via-fn-vert-moyen to-fn-vert-moyen/30 rounded-full"
+            className="absolute left-[7px] top-2 bottom-12 w-[2px] bg-gradient-to-b from-fn-orange via-fn-gris-bordure to-fn-gris-bordure/20 rounded-full"
             aria-hidden="true"
           />
 

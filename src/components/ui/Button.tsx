@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Style variant */
-  variant?: 'primary' | 'secondary' | 'accent' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'outline';
   /** Button size */
   size?: 'sm' | 'md' | 'lg';
   /** Optional link href */
@@ -19,9 +19,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Bouton capsule — orange franc comme accent principal.
- * Forme arrondie, surface mate, sensation physique et tactile.
- * Style éditorial : utilisé avec parcimonie, jamais agressif.
+ * Bouton dashboard — propre, professionnel, accent orange parcimonie.
+ * Style : rounded-xl, ombres data, transitions rapides.
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -37,24 +36,26 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const sizeClasses = {
-      sm: 'px-5 py-2 text-sm',
-      md: 'px-7 py-3 text-base',
-      lg: 'px-9 py-4 text-lg',
+      sm: 'px-4 py-2 text-sm',
+      md: 'px-6 py-3 text-sm',
+      lg: 'px-8 py-3.5 text-base',
     };
 
     const variantClasses = {
       primary:
-        'btn-capsule bg-fn-orange text-white shadow-capsule hover:bg-fn-orange-doux hover:shadow-[0_8px_24px_rgba(232,134,42,0.3)] focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2',
+        'btn-dashboard bg-fn-orange text-white shadow-glow-orange hover:bg-fn-orange-doux focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir',
       secondary:
-        'btn-capsule border-2 border-fn-vert-profond/20 text-fn-vert-profond bg-white hover:bg-fn-vert-profond hover:text-white hover:border-fn-vert-profond focus-visible:ring-2 focus-visible:ring-fn-vert-moyen focus-visible:ring-offset-2',
+        'btn-dashboard bg-fn-noir-eleve border border-fn-gris-bordure text-fn-blanc hover:bg-fn-gris-fonce hover:border-fn-gris focus-visible:ring-2 focus-visible:ring-fn-gris focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir',
       accent:
-        'btn-capsule bg-fn-orange text-white shadow-capsule hover:bg-fn-orange-doux focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2',
+        'btn-dashboard bg-fn-orange text-white shadow-glow-orange hover:bg-fn-orange-doux focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir',
       ghost:
-        'btn-capsule border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 hover:border-white/50 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2',
+        'btn-dashboard border border-fn-gris-bordure text-fn-gris-clair bg-transparent hover:bg-fn-noir-eleve hover:text-fn-blanc hover:border-fn-gris focus-visible:ring-2 focus-visible:ring-fn-gris focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir',
+      outline:
+        'btn-dashboard border-2 border-fn-orange/50 text-fn-orange bg-transparent hover:bg-fn-orange/10 hover:border-fn-orange focus-visible:ring-2 focus-visible:ring-fn-orange focus-visible:ring-offset-2 focus-visible:ring-offset-fn-noir',
     };
 
     const disabledClasses = disabled
-      ? 'opacity-50 cursor-not-allowed'
+      ? 'opacity-40 cursor-not-allowed'
       : 'cursor-pointer';
 
     const baseClasses = `inline-flex items-center justify-center whitespace-nowrap ${sizeClasses[size]} ${variantClasses[variant]} ${disabledClasses} ${className}`;
